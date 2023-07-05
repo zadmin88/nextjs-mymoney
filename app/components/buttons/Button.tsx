@@ -7,7 +7,7 @@ interface ButtonProps {
   color?: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
-  rouded?: boolean;
+  rounded?: boolean;
   icon?: IconType;
 }
 
@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   color,
   onClick,
   disabled,
-  rouded,
+  rounded,
   icon: Icon,
 }) => {
   return (
@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
         transition
         w-full
         py-3
-        ${rouded ? 'rounded-full' : 'rounded-lg'}
+        ${rounded ? 'rounded-full' : 'rounded-lg'}
         ${
           color === 'white'
             ? 'bg-white text-gray-800'
