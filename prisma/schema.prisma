@@ -22,8 +22,8 @@ model User {
   favoriteIds     String[] @db.ObjectId
 
   accounts Account[]
-  // listings Listing[]
-  // reservations Reservation[]
+  moneyAccounts MoneyAccount[]
+  movements Movement[]
 }
 
 model Account {
@@ -45,34 +45,29 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-// model Listing {
-//   id             String @id @default(auto()) @map("_id") @db.ObjectId
-//   title String
-//   description String
-//   imageSrc String
-//   createdAt DateTime @default(now())
-//   category  String
-//   roomCount Int
-//   bathroomCount Int
-//   guestCount Int
-//   locationValue String
-//   userId String @db.ObjectId
-//   price Int
+model MoneyAccount {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String    
+  accountType  String    
+  balance      Float     @default(0)
+  creditLimit  Float?
+  currency     String    @default("COP")
 
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   reservations Reservation[]
-// }
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
+  movements    Movement[] 
+}
 
 
-// model Reservation {
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   userId String @db.ObjectId
-//   listingId String @db.ObjectId  
-//   startDate DateTime
-//   endDate DateTime
-//   totalPrice Int
-//   createdAt DateTime @default(now())
+model Movement {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  description   String
+  amount        Float
+  category      String
+  movementType  String    
+  isTransfer    Boolean
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
-// }
+  account MoneyAccount @relation(fields: [id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
+}
