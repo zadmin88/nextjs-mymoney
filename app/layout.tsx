@@ -5,7 +5,7 @@ import Container from './components/Container';
 import LoginModal from './components/modals/LoginModal';
 import RegisterModal from './components/modals/RegisteModal';
 import ToasterProvider from './providers/ToasterProvider';
-
+import Navbar from './components/navbar/Navbar';
 const font = Montserrat({ subsets: ['latin'] });
 
 export const metadata = {
@@ -23,8 +23,9 @@ export default function RootLayout({
       <body className={font.className} suppressHydrationWarning={true}>
         <ClientOnly>   
           <ToasterProvider />
-        <LoginModal />
-        <RegisterModal />
+          <LoginModal />
+          <RegisterModal />
+          <Navbar />
         </ClientOnly>
         <div>{children}</div>
       </body>
