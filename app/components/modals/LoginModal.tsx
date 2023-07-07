@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import { useCallback, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
+import { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
-import useRegisterModal from '@/app/hooks/useRegisterModal copy';
-import useLoginModal from '@/app/hooks/useLoginModal';
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
-import Modal from './Modal';
-import Heading from '../Heading'
-import Input from '../inputs/Input';
-
+import Modal from "./Modal";
+import Heading from "../Heading";
+import Input from "../inputs/Input";
 
 const LoginModal = () => {
   const router = useRouter();
@@ -26,23 +25,23 @@ const LoginModal = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    signIn('credentials', {
+    signIn("credentials", {
       ...data,
       redirect: false,
     }).then((callback) => {
       setIsLoading(false);
 
       if (callback?.ok) {
-        toast.success('Logged in');
-        router.push('/');
+        toast.success("Logged in");
+        router.push("/");
         loginModal.onClose();
       }
 
@@ -58,20 +57,23 @@ const LoginModal = () => {
   }, [loginModal, registerModal]);
 
   const bodyContent = (
-    <div className='flex flex-col gap-4'>
-      <Heading title='Bienvenido a MyMoney' subtitle='Inicia sesión para continuar' />
+    <div className="flex flex-col gap-4">
+      <Heading
+        title="Bienvenido a MyMoney"
+        subtitle="Inicia sesión para continuar"
+      />
       <Input
-        id='email'
-        label='Correo Electronico'
+        id="email"
+        label="Correo Electronico"
         disabled={isLoading}
         register={register}
         errors={errors}
         required
       />
       <Input
-        id='password'
-        label='Constraseña'
-        type='password'
+        id="password"
+        label="Constraseña"
+        type="password"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -81,7 +83,7 @@ const LoginModal = () => {
   );
 
   const footerContent = (
-    <div className='flex flex-col gap-4 mt-3'>
+    <div className="flex flex-col gap-4 mt-3">
       <hr />
       {/* <Button
         
@@ -90,22 +92,22 @@ const LoginModal = () => {
         // onClick={() => signIn('google')}
         onClick={() => {}}
         /> */}
-     
+
       <div
-        className='
-      text-neutral-500 text-center mt-4 font-light'
+        className="
+      text-neutral-500 text-center mt-4 font-light"
       >
         <p>
           Primera vez en MyMoney?
           <span
             onClick={onToggle}
-            className='
+            className="
               text-neutral-800
               cursor-pointer 
               hover:underline
-            '
+            "
           >
-            {' '}
+            {" "}
             Crea una cuenta
           </span>
         </p>
@@ -115,10 +117,10 @@ const LoginModal = () => {
 
   return (
     <Modal
-      color='lime'
+      color="lime"
       disabled={isLoading}
-      isOpen={loginModal.isOpen}      
-      actionLabel='Iniciar sesión'
+      isOpen={loginModal.isOpen}
+      actionLabel="Iniciar sesión"
       onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
