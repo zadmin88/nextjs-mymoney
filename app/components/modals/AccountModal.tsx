@@ -52,6 +52,7 @@ const AccountModal = () => {
       .post("/api/accounts", data)
       .then(() => {
         toast.success("Cuenta Creada!");
+        router.refresh();
         accountModal.onClose();
       })
       .catch((error) => {

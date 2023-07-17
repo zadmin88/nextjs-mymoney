@@ -1,13 +1,25 @@
-"use client";
+import ClientOnly from "./components/ClientOnly";
+import getMoneyAccount from "./actions/getMoneyAccount";
+import getCurrentUser from "./actions/getCurrentUser";
+import AccountsContainer from "./components/accounts/AccountsContainer";
+import TotalsContainer from "./components/TotalsContainer";
+import Container from "./components/Container";
 
-import useAccountModal from "./hooks/useAccountModal";
-export default function Home() {
-  const accountModal = useAccountModal();
+export default async function Home() {
+  const currentUser = await getCurrentUser();
+  const moneyAccounts = await getMoneyAccount();
+
   return (
-    <div>
-      <button onClick={accountModal.onOpen} className="bg-brand-teal">
-        Agregar cuenta
-      </button>
+    <div className="bg-brand-lime">
+      <ClientOnly>
+        <Container>
+          <TotalsContainer
+            moneyAccounts={moneyAccounts}
+            currentUser={currentUser}
+          />
+          <AccountsContainer moneyAccounts={moneyAccounts} />
+        </Container>
+      </ClientOnly>
     </div>
   );
 }

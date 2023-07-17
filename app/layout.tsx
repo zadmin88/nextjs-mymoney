@@ -7,6 +7,7 @@ import RegisterModal from "./components/modals/RegisteModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import Navbar from "./components/navbar/Navbar";
 import AccountModal from "./components/modals/AccountModal";
+// import getMoneyAccount from "./actions/getMoneyAccount";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -30,7 +31,7 @@ export default function RootLayout({
           <RegisterModal />
           <Navbar />
         </ClientOnly>
-        <div>{children}</div>
+        <div className="pb-20">{children}</div>
       </body>
     </html>
   );
