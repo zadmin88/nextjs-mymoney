@@ -1,9 +1,9 @@
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 import ClientOnly from "./components/ClientOnly";
-import Container from "./components/Container";
 import LoginModal from "./components/modals/LoginModal";
 import RegisterModal from "./components/modals/RegisteModal";
+import MovementModal from "./components/modals/MovementModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import Navbar from "./components/navbar/Navbar";
 import AccountModal from "./components/modals/AccountModal";
@@ -26,6 +26,7 @@ export default function RootLayout({
       <body className={font.className} suppressHydrationWarning={true}>
         <ClientOnly>
           <AccountModal />
+          <MovementModal />
           <ToasterProvider />
           <LoginModal />
           <RegisterModal />

@@ -3,12 +3,15 @@
 import { MoneyAccount } from "@prisma/client";
 import TotalCardItem from "@/app/components/accounts/TotalCardItem";
 import Button from "@/app/components/buttons/Button";
+import useMovementModal from "@/app/hooks/useMovementModal";
+
 interface MoneyAccountProps {
   moneyAccount: MoneyAccount;
 }
 
 const MoneyAccountClient: React.FC<any> = ({ data }) => {
-  const { moneyAccount } = data;
+  const movementModal = useMovementModal();
+  const { moneyAccount, totals } = data;
 
   return (
     <div className="px-6 mt-24 flex flex-col gap-4">
@@ -30,13 +33,13 @@ const MoneyAccountClient: React.FC<any> = ({ data }) => {
           bgColor="bg-gray-100"
           name="Ingresos"
           icon={`/icons/moneyAccount/incomeVector.svg`}
-          balance={0}
+          balance={totals?.totalIncomes}
         />
         <TotalCardItem
           bgColor="bg-gray-100"
           name="Gastos"
           icon={`/icons/moneyAccount/outcomeVector.svg`}
-          balance={0}
+          balance={totals?.totalOutcomes}
         />
       </div>
 
@@ -46,7 +49,11 @@ const MoneyAccountClient: React.FC<any> = ({ data }) => {
         </h1>
 
         <div className="bg-white rounded-2xl py-4 px-6">
-          <Button rounded label="Agregar un movimiento" onClick={() => {}} />
+          <Button
+            rounded
+            label="Agregar un movimiento"
+            onClick={movementModal.onOpen}
+          />
         </div>
       </div>
     </div>

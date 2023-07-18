@@ -12,7 +12,6 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
 
-  console.log(currency.value);
   const moneyAccount = await prisma.moneyAccount.create({
     data: {
       name,

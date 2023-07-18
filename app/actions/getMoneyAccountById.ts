@@ -70,7 +70,33 @@ export default async function getMoneyAccountById(IParams: IParams) {
       },
     });
 
-    return { moneyAccount };
+    const sumBymovementType = await prisma.movement.groupBy({
+      where: {
+        accountId: moneyAccountId,
+      },
+      by: ["movementType"],
+      _sum: {
+        amount: true,
+      },
+    });
+
+    const totals = sumBymovementType.reduce(
+      (acc, val) => {
+        if (val._sum.amount) {
+          if (val.movementType === "income") {
+            acc.totalIncomes = +val._sum.amount;
+          }
+
+          if (val.movementType === "outcome") {
+            acc.totalOutcomes = +val._sum.amount;
+          }
+        }
+        return acc;
+      },
+      { totalIncomes: 0, totalOutcomes: 0 }
+    );
+
+    return { moneyAccount, totals };
   } catch (error: any) {
     throw new Error(error);
   }

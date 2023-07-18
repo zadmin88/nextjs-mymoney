@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { IconType } from 'react-icons';
+import { IconType } from "react-icons";
 
 interface ButtonProps {
   label: string;
@@ -9,6 +9,7 @@ interface ButtonProps {
   disabled?: boolean;
   rounded?: boolean;
   icon?: IconType;
+  small?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   rounded,
   icon: Icon,
+  small,
 }) => {
   return (
     <button
@@ -29,30 +31,35 @@ const Button: React.FC<ButtonProps> = ({
         relative
         disabled:bg-gray-300
         disabled:cursor-not-allowed               
-         hover:bg-gray-300
-         hover:text-white 
+         sm:hover:bg-gray-300
+         sm:hover:text-white 
         transition
         w-full
-        py-3
-        ${rounded ? 'rounded-full' : 'rounded-lg'}
+        
+        ${small ? "py-2 px-2" : "py-4"}
+
+        ${rounded ? "rounded-full" : "rounded-lg"}
         ${
-          color === 'white'
-            ? 'bg-white text-gray-800'
-            : color === 'lime'
-            ? 'bg-brand-lime  text-white'
-            : color === 'red  text-white'
-            ? 'bg-red-500 text-white'  
-            : 'bg-gray-800  text-white'
-        }`}
+          color === "white"
+            ? "bg-white text-gray-800"
+            : color === "lime"
+            ? "bg-brand-lime  text-white"
+            : color === "red"
+            ? "bg-red-500 text-white"
+            : color === "inactive"
+            ? "bg-gray-300 text-white"
+            : "bg-gray-800  text-white"
+        }
+        `}
     >
       {Icon && (
         <Icon
           size={24}
-          className='
+          className="
             absolute
             left-4
             top-3
-          '
+          "
         />
       )}
       {label}
