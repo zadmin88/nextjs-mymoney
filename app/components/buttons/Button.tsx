@@ -25,8 +25,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`
-       
+      className={`       
         font-semibold
         relative
         disabled:bg-gray-300
@@ -34,10 +33,8 @@ const Button: React.FC<ButtonProps> = ({
          sm:hover:bg-gray-300
          sm:hover:text-white 
         transition
-        w-full
-        
+        w-full        
         ${small ? "py-2 px-2" : "py-4"}
-
         ${rounded ? "rounded-full" : "rounded-lg"}
         ${
           color === "white"
@@ -48,6 +45,8 @@ const Button: React.FC<ButtonProps> = ({
             ? "bg-red-500 text-white"
             : color === "inactive"
             ? "bg-gray-300 text-white"
+            : color === "gray"
+            ? "bg-gray-300 text-gray-800"
             : "bg-gray-800  text-white"
         }
         `}

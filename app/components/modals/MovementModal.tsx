@@ -66,6 +66,7 @@ const MovementModal = () => {
         toast.success("Movimiento creado!");
         router.refresh();
         movementModal.onClose();
+        reset();
       })
       .catch((error) => {
         toast.error("Algo salío mal");

@@ -96,7 +96,16 @@ export default async function getMoneyAccountById(IParams: IParams) {
       { totalIncomes: 0, totalOutcomes: 0 }
     );
 
-    return { moneyAccount, totals };
+    const safeMoneyAccount = {
+      ...moneyAccount,
+      movements: moneyAccount?.movements.map((mov) => ({
+        ...mov,
+        createdAt: mov.createdAt.toISOString(),
+        updatedAt: mov.updatedAt.toISOString(),
+      })),
+    };
+
+    return { safeMoneyAccount, totals };
   } catch (error: any) {
     throw new Error(error);
   }
