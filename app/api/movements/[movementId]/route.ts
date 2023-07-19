@@ -67,3 +67,64 @@ export async function DELETE(
 
   return NextResponse.json(deletedMovement);
 }
+
+export async function PATCH(request: Request, { params }: { params: IParams }) {
+  const currentUser = await getCurrentUser();
+  const body = await request.json();
+
+  const { amount, category, description, icon } = body;
+
+  if (!currentUser) {
+    return NextResponse.error();
+  }
+
+  const { movementId } = params;
+
+  if (!movementId || typeof movementId !== "string") {
+    throw new Error("Invalid ID");
+  }
+
+  const movement = await prisma.movement.findUnique({
+    where: {
+      id: movementId,
+    },
+  });
+
+  const uptadetMovement = await prisma.movement.update({
+    where: {
+      id: movementId,
+    },
+    data: {
+      amount: +amount,
+      category,
+      description,
+      icon,
+    },
+  });
+
+  if (movement) {
+    const deleteMovement = await prisma.moneyAccount.update({
+      where: {
+        id: movement.accountId,
+      },
+      data: {
+        balance: {
+          decrement: +movement.amount,
+        },
+      },
+    });
+
+    const updatedAccount = await prisma.moneyAccount.update({
+      where: {
+        id: movement.accountId,
+      },
+      data: {
+        balance: {
+          increment: +amount,
+        },
+      },
+    });
+  }
+
+  return NextResponse.json(uptadetMovement);
+}

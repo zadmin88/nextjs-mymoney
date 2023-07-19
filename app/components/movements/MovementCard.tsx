@@ -7,6 +7,7 @@ import Button from "../buttons/Button";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import useUpdateMovementModal from "@/app/hooks/useUpdateMovementModal";
 
 interface MovementProps {
   movement: safeMovement;
@@ -16,7 +17,7 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [deletingId, setDeletingId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const updateMovementModal = useUpdateMovementModal();
   const router = useRouter();
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
@@ -52,6 +53,15 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
     [onDelete, movement]
   );
 
+  const handleEdit = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      updateMovementModal.setMovement(movement);
+      updateMovementModal.onOpen();
+    },
+    [updateMovementModal, movement]
+  );
+
   return (
     <div className="flex flex-col border rounded-xl px-6 py-2 gap-2">
       <div className="flex items-center justify-between">
@@ -74,7 +84,13 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
           </div>
         </div>
         <div className="flex items-center gap-2" onClick={toggleOpen}>
-          <span className="text-base font-semibold text-red-500">
+          <span
+            className={`text-base font-semibold ${
+              movement.movementType === "outcome"
+                ? "text-red-500"
+                : "text-brand-lime"
+            }`}
+          >
             $ {movement.amount}
           </span>
           <svg
@@ -96,7 +112,7 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
           <Button
             label="Editar"
             color="gray"
-            onClick={() => {}}
+            onClick={handleEdit}
             small
             disabled={isLoading}
           />

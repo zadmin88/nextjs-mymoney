@@ -4,6 +4,7 @@ import ClientOnly from "./components/ClientOnly";
 import LoginModal from "./components/modals/LoginModal";
 import RegisterModal from "./components/modals/RegisteModal";
 import MovementModal from "./components/modals/MovementModal";
+import UpdateMovementModal from "./components/modals/UpdateMovementModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import Navbar from "./components/navbar/Navbar";
 import AccountModal from "./components/modals/AccountModal";
@@ -27,6 +28,7 @@ export default function RootLayout({
         <ClientOnly>
           <AccountModal />
           <MovementModal />
+          <UpdateMovementModal />
           <ToasterProvider />
           <LoginModal />
           <RegisterModal />
