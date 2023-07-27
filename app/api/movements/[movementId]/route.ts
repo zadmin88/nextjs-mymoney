@@ -102,7 +102,7 @@ export async function PATCH(request: Request, { params }: { params: IParams }) {
     },
   });
 
-  if (movement) {
+  if (movement?.movementType === "income") {
     const deleteMovement = await prisma.moneyAccount.update({
       where: {
         id: movement.accountId,
@@ -121,6 +121,30 @@ export async function PATCH(request: Request, { params }: { params: IParams }) {
       data: {
         balance: {
           increment: +amount,
+        },
+      },
+    });
+  }
+
+  if (movement?.movementType === "outcome") {
+    const deleteMovement = await prisma.moneyAccount.update({
+      where: {
+        id: movement.accountId,
+      },
+      data: {
+        balance: {
+          increment: +movement.amount,
+        },
+      },
+    });
+
+    const updatedAccount = await prisma.moneyAccount.update({
+      where: {
+        id: movement.accountId,
+      },
+      data: {
+        balance: {
+          decrement: +amount,
         },
       },
     });

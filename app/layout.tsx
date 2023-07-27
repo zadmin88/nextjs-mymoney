@@ -8,6 +8,7 @@ import UpdateMovementModal from "./components/modals/UpdateMovementModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import Navbar from "./components/navbar/Navbar";
 import AccountModal from "./components/modals/AccountModal";
+import AccountSelectionModal from "./components/modals/AccountSelectionModal";
 // import getMoneyAccount from "./actions/getMoneyAccount";
 
 const font = Montserrat({ subsets: ["latin"] });
@@ -29,6 +30,7 @@ export default function RootLayout({
           <AccountModal />
           <MovementModal />
           <UpdateMovementModal />
+          <AccountSelectionModal />
           <ToasterProvider />
           <LoginModal />
           <RegisterModal />

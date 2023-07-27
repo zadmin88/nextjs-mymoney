@@ -37,6 +37,7 @@ export default async function getMoneyAccount() {
     //   }
 
     const sumByAccountType = await prisma.moneyAccount.groupBy({
+      where: query,
       by: ["accountType"],
       _sum: {
         balance: true,

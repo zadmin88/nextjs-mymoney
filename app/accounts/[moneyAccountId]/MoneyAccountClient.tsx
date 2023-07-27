@@ -4,17 +4,32 @@ import { MoneyAccount } from "@prisma/client";
 import TotalCardItem from "@/app/components/accounts/TotalCardItem";
 import Button from "@/app/components/buttons/Button";
 import useMovementModal from "@/app/hooks/useMovementModal";
+import useAccountSelectionModal from "@/app/hooks/useAccountSelectionModal";
 import MovementCard from "@/app/components/movements/MovementCard";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import useAccountsList from "@/app/hooks/useAccountsList";
 interface MoneyAccountProps {
   moneyAccount: MoneyAccount;
 }
 
-const MoneyAccountClient: React.FC<any> = ({ data }) => {
+const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
+  const { setAccountList, accountList } = useAccountsList((state) => state);
   const movementModal = useMovementModal();
+  const accountSelectionModal = useAccountSelectionModal();
+
   const { safeMoneyAccount, totals } = data;
   const router = useRouter();
+
+  useEffect(() => {
+    const accounts = moneyAccounts.moneyAccounts.map((acc: any) => {
+      return { name: acc.name, accountType: acc.accountType, id: acc.id };
+    });
+
+    setAccountList(accounts);
+  }, [setAccountList, moneyAccounts.moneyAccounts]);
+
   return (
     <div className="px-6 mt-8">
       <div className="flex justify-between">
@@ -26,7 +41,10 @@ const MoneyAccountClient: React.FC<any> = ({ data }) => {
           className="h-16 w-3"
           onClick={() => router.back()}
         />
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          onClick={accountSelectionModal.onOpen}
+        >
           <span className="text-base font-semibold text-gray-900">
             {safeMoneyAccount.name}
           </span>

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useCallback, useEffect, useState } from 'react';
-import { IoMdClose } from 'react-icons/io';
-import Button from '../buttons/Button';
+import { useCallback, useEffect, useState } from "react";
+import { IoMdClose } from "react-icons/io";
+import Button from "../buttons/Button";
 
 interface ModalProps {
   isOpen?: boolean;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit?: () => void;
   title?: string;
   body?: React.ReactElement;
   footer?: React.ReactElement;
@@ -15,8 +15,8 @@ interface ModalProps {
   disabled?: boolean;
   secondaryAction?: () => void;
   secondaryActionLabel?: string;
-  color?:string;
-  rounded?:boolean;
+  color?: string;
+  rounded?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -30,8 +30,8 @@ const Modal: React.FC<ModalProps> = ({
   disabled,
   secondaryAction,
   secondaryActionLabel,
-  color, 
-  rounded
+  color,
+  rounded,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -55,7 +55,7 @@ const Modal: React.FC<ModalProps> = ({
       return;
     }
 
-    onSubmit();
+    onSubmit?.();
   }, [onSubmit, disabled]);
 
   const handleSecondaryAction = useCallback(() => {
@@ -73,7 +73,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <>
       <div
-        className='
+        className="
           justify-center 
           items-center 
           flex 
@@ -85,10 +85,10 @@ const Modal: React.FC<ModalProps> = ({
           outline-none 
           focus:outline-none
           bg-neutral-800/70
-        '
+        "
       >
         <div
-          className='
+          className="
           relative 
           w-full
           md:w-4/6
@@ -100,7 +100,7 @@ const Modal: React.FC<ModalProps> = ({
           lg:h-auto
           md:h-auto
           
-          '
+          "
         >
           {/*content*/}
           <div
@@ -108,12 +108,12 @@ const Modal: React.FC<ModalProps> = ({
             translate
             duration-300
             h-full
-            ${showModal ? 'translate-y-0' : 'translate-y-full'}
-            ${showModal ? 'opacity-100' : 'opacity-0'}
+            ${showModal ? "translate-y-0" : "translate-y-full"}
+            ${showModal ? "opacity-100" : "opacity-0"}
           `}
           >
             <div
-              className='
+              className="
               translate
               h-full
               lg:h-auto
@@ -128,11 +128,11 @@ const Modal: React.FC<ModalProps> = ({
               bg-white  
               outline-none 
               focus:outline-none
-            '
+            "
             >
               {/*header*/}
               <div
-                className='
+                className="
                 flex 
                 items-center 
                 p-12 
@@ -140,51 +140,52 @@ const Modal: React.FC<ModalProps> = ({
                 justify-center
                 relative
                 
-                '
+                "
               >
                 <button
-                  className='
+                  className="
                     p-1
                     border-0 
                     hover:opacity-70
                     transition
                     absolute
                     right-9
-                  '
+                  "
                   onClick={handleClose}
                 >
                   <IoMdClose size={24} />
                 </button>
-                <div className='text-lg font-semibold'>{title}</div>
+                <div className="text-lg font-semibold">{title}</div>
               </div>
               {/*body*/}
-              <div className='relative p-6 flex-auto'>{body}</div>
+              <div className="relative p-6 flex-auto">{body}</div>
               {/*footer*/}
-              <div className='flex flex-col gap-2 p-6'>
+              <div className="flex flex-col gap-2 p-6">
                 <div
-                  className='
+                  className="
                     flex 
                     flex-row 
                     items-center 
                     gap-4 
                     w-full
-                  '
+                  "
                 >
                   {secondaryAction && secondaryActionLabel && (
                     <Button
                       disabled={disabled}
                       label={secondaryActionLabel}
                       onClick={handleSecondaryAction}
-                      
                     />
                   )}
-                  <Button
-                  color={color}
-                    disabled={disabled}
-                    label={actionLabel}
-                    onClick={handleSubmit}
-                    rounded={rounded}
-                  />
+                  {onSubmit && (
+                    <Button
+                      color={color}
+                      disabled={disabled}
+                      label={actionLabel}
+                      onClick={handleSubmit}
+                      rounded={rounded}
+                    />
+                  )}
                 </div>
                 {footer}
               </div>
