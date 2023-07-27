@@ -39,7 +39,7 @@ const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
           height={0}
           width={0}
           className="h-16 w-3"
-          onClick={() => router.back()}
+          onClick={() => router.push("/")}
         />
         <div
           className="flex items-center gap-2"
