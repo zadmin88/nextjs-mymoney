@@ -13,7 +13,6 @@ export async function DELETE(
 ) {
   const currentUser = await getCurrentUser();
 
-  console.log("first");
   if (!currentUser) {
     return NextResponse.error();
   }

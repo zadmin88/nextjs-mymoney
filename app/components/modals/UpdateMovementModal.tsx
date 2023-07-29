@@ -74,20 +74,40 @@ const UpdateMovementModal = () => {
       icon: iconUpdate,
     };
 
-    axios
-      .patch(`/api/movements/${movementToUpdate?.id}`, updateMovementDTO)
-      .then(() => {
-        toast.success("Movimiento Actualizado!");
-        router.refresh();
-        updateMovementModal.onClose();
-        reset();
-      })
-      .catch((error) => {
-        toast.error("Algo salío mal");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if (!movementToUpdate?.isTransfer) {
+      axios
+        .patch(`/api/movements/${movementToUpdate?.id}`, updateMovementDTO)
+        .then(() => {
+          toast.success("Movimiento Actualizado!");
+          router.refresh();
+          updateMovementModal.onClose();
+          reset();
+        })
+        .catch((error) => {
+          toast.error("Algo salío mal");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      axios
+        .patch(
+          `/api/transfers/${movementToUpdate?.transferId}`,
+          updateMovementDTO
+        )
+        .then(() => {
+          toast.success("Movimiento Actualizado!");
+          router.refresh();
+          updateMovementModal.onClose();
+          reset();
+        })
+        .catch((error) => {
+          toast.error("Algo salío mal");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   };
 
   const bodyContent = (
@@ -134,10 +154,14 @@ const UpdateMovementModal = () => {
         errors={errors}
         required
       />
-      <CategorySelect
-        value={category}
-        onChange={(value) => setCustomValue("category", value)}
-      />
+      {!movementToUpdate?.isTransfer ? (
+        <CategorySelect
+          value={category}
+          onChange={(value) => setCustomValue("category", value)}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 

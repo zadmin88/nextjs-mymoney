@@ -24,22 +24,38 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
   }, []);
 
   const onDelete = useCallback(
-    (id: string) => {
+    (id: string, isTransfer: boolean, transferId: string | null) => {
       setDeletingId(id);
       setIsLoading(true);
-      axios
-        .delete(`/api/movements/${id}`)
-        .then(() => {
-          toast.success("Movement deleted");
-          router.refresh();
-          setIsLoading(false);
-        })
-        .catch(() => {
-          toast.error("Something went wrong.");
-        })
-        .finally(() => {
-          setDeletingId("");
-        });
+      if (!isTransfer) {
+        axios
+          .delete(`/api/movements/${id}`)
+          .then(() => {
+            toast.success("Movement deleted");
+            router.refresh();
+            setIsLoading(false);
+          })
+          .catch(() => {
+            toast.error("Something went wrong.");
+          })
+          .finally(() => {
+            setDeletingId("");
+          });
+      } else {
+        axios
+          .delete(`/api/transfers/${transferId}`)
+          .then(() => {
+            toast.success("Transfer deleted");
+            router.refresh();
+            setIsLoading(false);
+          })
+          .catch(() => {
+            toast.error("Something went wrong.");
+          })
+          .finally(() => {
+            setDeletingId("");
+          });
+      }
     },
     [router]
   );
@@ -48,7 +64,7 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
-      onDelete?.(movement.id);
+      onDelete?.(movement.id, movement.isTransfer, movement.transferId);
     },
     [onDelete, movement]
   );
