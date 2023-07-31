@@ -85,8 +85,8 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
           <Image
             src={movement.icon}
             alt="icon"
-            height={24}
-            width={24}
+            height={100}
+            width={100}
             className="h-6 w-6"
           />
           <div className="flex flex-col ml-6 ">

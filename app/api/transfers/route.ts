@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     data: {
       amount: +amount,
       category,
-      description: `Transfer from ${moneyAccount.name}`,
+      description: `Trans. From ${moneyAccount.name}`,
       icon,
       isTransfer,
       movementType: "income",

@@ -83,7 +83,7 @@ const MovementModal = () => {
         ...data,
         isTransfer: true,
         category: "transfer",
-        icon: "/icons/categories/accountsVector.png",
+        icon: "/icons/categories/transferVector.png",
         accountId: moneyAccountId,
         transferToAccount: account.value,
       };

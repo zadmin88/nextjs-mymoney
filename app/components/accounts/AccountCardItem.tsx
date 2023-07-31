@@ -20,7 +20,13 @@ const AccountCardItem: React.FC<AccountCardItemProps> = ({
       onClick={() => router.push(`/accounts/${id}`)}
       className="flex py-4 gap-8 border-t items-center bg-white"
     >
-      <Image src={icon} alt={name} height={24} width={24} className="h-6 w-6" />
+      <Image
+        src={icon}
+        alt={name}
+        height={100}
+        width={100}
+        className="h-6 w-6"
+      />
       <div className="flex flex-col">
         <span className="text-base font-semibold">{name}</span>
         <span className="text-sm">$ {balance}</span>
