@@ -12,10 +12,12 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
 
+  let numBalance = accountType.value === "debt" ? +balance * -1 : +balance;
+
   const moneyAccount = await prisma.moneyAccount.create({
     data: {
       name,
-      balance: +balance,
+      balance: numBalance,
       accountType: accountType.value,
 
       userId: currentUser.id,
