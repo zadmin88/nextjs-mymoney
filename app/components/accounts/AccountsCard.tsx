@@ -29,8 +29,9 @@ const AccountsCard: React.FC<any> = ({ moneyAccounts }) => {
         <Image
           src="/icons/addNewItemVector.png"
           alt="add icon"
-          height="24"
-          width="24"
+          height={24}
+          width={24}
+          className="h-6 w-6"
         />
 
         <span className="text-base">Agregar nueva cuenta</span>

@@ -35,13 +35,13 @@ const AccountsSelect: React.FC<AccountsSelectProps> = ({ value, onChange }) => {
         formatOptionLabel={(option: any) => (
           <div
             className="
-          flex flex-row items-center gap-3"
+          flex flex-row items-center gap-3 bg-gray-100 rounded-md  py-2"
           >
             <Image
               src={option?.icon}
               alt={option.label}
-              height="0"
-              width="0"
+              height={24}
+              width={24}
               className="w-6 h-6"
             />
             <div>{option.label}</div>
@@ -50,7 +50,7 @@ const AccountsSelect: React.FC<AccountsSelectProps> = ({ value, onChange }) => {
         classNames={{
           control: () => "p-3 border-b-2",
           input: () => "text-lg",
-          option: () => "text-lg bg-white",
+          option: () => "text-lg bg-white py-2",
         }}
         theme={(theme) => ({
           ...theme,

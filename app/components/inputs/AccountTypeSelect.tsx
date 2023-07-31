@@ -32,7 +32,7 @@ const AccountTypeSelect: React.FC<AccountTypeSelectProps> = ({
         formatOptionLabel={(option: any) => (
           <div
             className="
-          flex flex-row items-center gap-3"
+          flex flex-row items-center gap-3 "
           >
             <div>{option.label}</div>
           </div>
@@ -40,7 +40,7 @@ const AccountTypeSelect: React.FC<AccountTypeSelectProps> = ({
         classNames={{
           control: () => "p-3 border-b-2 ",
           input: () => "text-lg ",
-          option: () => "text-lg z-50 ",
+          option: () => "text-lg z-50 bg-white ",
         }}
         theme={(theme) => ({
           ...theme,

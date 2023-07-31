@@ -24,9 +24,9 @@ const AccountListCard: React.FC<AccountListCardProps> = ({
       <Image
         src={`/icons/moneyAccount/${accountType}Vector.png`}
         alt={name}
-        height="0"
-        width="0"
-        className="w-6 h-6"
+        height={24}
+        width={24}
+        className="h-6 w-6"
       />
 
       <span className="text-base font-semibold">{name}</span>

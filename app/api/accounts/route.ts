@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       name,
       balance: +balance,
       accountType: accountType.value,
-      currency: currency.value,
+
       userId: currentUser.id,
     },
   });

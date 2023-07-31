@@ -1,10 +1,10 @@
 const accountTypes = [
-  { value: "saving", label: "Ahorros" },
-  { value: "credit card", label: "Tarjeta de crédito" },
-  { value: "cash", label: "Efectivo" },
-  { value: "investment", label: "Inversiones" },
-  { value: "debt", label: "deuda" },
-  { value: "checking", label: "Cuenta de banco" },
+  { value: "saving", label: "Savings" },
+  { value: "credit card", label: "Credit Card" },
+  { value: "cash", label: "Cash" },
+  { value: "investment", label: "Investment" },
+  { value: "debt", label: "debt" },
+  { value: "checking", label: "Checking Account" },
 ];
 
 const useAccountTypes = () => {

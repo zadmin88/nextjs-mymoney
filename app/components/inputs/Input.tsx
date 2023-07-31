@@ -13,6 +13,7 @@ interface InputProps {
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+  bgColor?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -24,6 +25,7 @@ const Input: React.FC<InputProps> = ({
   register,
   required,
   errors,
+  bgColor = "white",
 }) => {
   const pathName = usePathname();
   return (
@@ -50,12 +52,12 @@ const Input: React.FC<InputProps> = ({
           w-full
           p-2
           pt-11 
-          font-light 
-          bg-white 
+          font-light          
           outline-none
           transition
           disabled:opacity-70
           disabled:cursor-not-allowed
+          ${bgColor === "white" ? "bg-white" : "bg-gray-100 text-gray-900 "}
           ${pathName === "/login" ? "border-2 rounded-xl" : "border-b-2"}
           ${formatPrice ? "pl-9" : "pl-4"}
           ${errors[id] ? "border-rose-500" : "border-neutral-300"}

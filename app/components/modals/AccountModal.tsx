@@ -64,34 +64,38 @@ const AccountModal = () => {
   };
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
       <Heading title="Agregar cuenta" />
-      <Input
-        id="name"
-        label="nombre"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
+      <div className="rounded-xl bg-gray-100 px-4 pb-6">
+        <Input
+          id="name"
+          label="Name"
+          bgColor="gray"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
 
-      <Input
-        id="balance"
-        type="number"
-        label="Valor inicial"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <CurrencySelect
-        value={currency}
-        onChange={(value) => setCustomValue("currency", value)}
-      />
-      <AccountTypeSelect
-        value={accountType}
-        onChange={(value) => setCustomValue("accountType", value)}
-      />
+        <Input
+          id="balance"
+          type="number"
+          label="Initial amount"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          bgColor="gray"
+          required
+        />
+        {/* <CurrencySelect
+          value={currency}
+          onChange={(value) => setCustomValue("currency", value)}
+        /> */}
+        <AccountTypeSelect
+          value={accountType}
+          onChange={(value) => setCustomValue("accountType", value)}
+        />
+      </div>
     </div>
   );
 

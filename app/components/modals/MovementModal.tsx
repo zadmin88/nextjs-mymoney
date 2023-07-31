@@ -142,29 +142,32 @@ const MovementModal = () => {
               : "Transferencia"
           }
         />
+        <div className="rounded-xl bg-gray-100 px-4 pb-6">
+          <Input
+            id="description"
+            label="descripción"
+            bgColor="gray"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
 
-        <Input
-          id="description"
-          label="descripción"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-
-        <Input
-          id="amount"
-          type="number"
-          label="Valor"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-        <CategorySelect
-          value={category}
-          onChange={(value) => setCustomValue("category", value)}
-        />
+          <Input
+            id="amount"
+            type="number"
+            label="Valor"
+            bgColor="gray"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+          <CategorySelect
+            value={category}
+            onChange={(value) => setCustomValue("category", value)}
+          />
+        </div>
       </div>
     );
   } else {
@@ -194,20 +197,22 @@ const MovementModal = () => {
           />
         </div>
         <Heading title={"Transferencia"} />
-
-        <Input
-          id="amount"
-          type="number"
-          label="Valor"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-        <AccountsSelect
-          value={account}
-          onChange={(value) => setCustomValue("account", value)}
-        />
+        <div className="rounded-xl bg-gray-100 px-4 pb-6">
+          <Input
+            id="amount"
+            type="number"
+            label="Valor"
+            bgColor="gray"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+          <AccountsSelect
+            value={account}
+            onChange={(value) => setCustomValue("account", value)}
+          />
+        </div>
       </div>
     );
   }
