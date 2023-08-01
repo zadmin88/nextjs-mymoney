@@ -42,6 +42,7 @@ const AccountsCard: React.FC<any> = ({ moneyAccounts }) => {
           id={account.id}
           name={account.name}
           balance={account.balance}
+          accountType={account.accountType}
           icon={`/icons/moneyAccount/${account.accountType}Vector.png`}
         />
       ))}

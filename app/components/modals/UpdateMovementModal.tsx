@@ -21,9 +21,7 @@ const UpdateMovementModal = () => {
     (state) => state.movementToUpdate
   );
 
-  const moneyAccountId = params?.moneyAccountId;
   const [isLoading, setIsLoading] = useState(false);
-  const [movType, setMovType] = useState("");
 
   const {
     register,
@@ -112,29 +110,6 @@ const UpdateMovementModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      {/* <div className="flex gap-4 mb-12">
-        <Button
-          label="Ingreso"
-          rounded
-          onClick={() => setMovType("income")}
-          color={movType === "income" ? "" : "inactive"}
-          small
-        />
-        <Button
-          label="Gasto"
-          rounded
-          onClick={() => setMovType("outcome")}
-          color={movType === "outcome" ? "" : "inactive"}
-          small
-        />
-        <Button
-          label="Transferencia"
-          rounded
-          onClick={() => setMovType("transfer")}
-          color={movType === "transfer" ? "" : "inactive"}
-          small
-        />
-      </div> */}
       <Heading title={"Editar movimiento"} />
       <Input
         id="description"

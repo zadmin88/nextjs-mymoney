@@ -20,8 +20,6 @@ export async function POST(request: Request) {
     account,
   } = body;
 
-  console.log(body);
-
   if (!currentUser) {
     return NextResponse.error();
   }

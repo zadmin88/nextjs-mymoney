@@ -23,7 +23,7 @@ const AccountTypeSelect: React.FC<AccountTypeSelectProps> = ({
   return (
     <div>
       <Select
-        placeholder="Categoria"
+        placeholder="Category"
         isClearable
         unstyled
         options={getAll()}
