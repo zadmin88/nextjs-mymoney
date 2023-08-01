@@ -54,7 +54,7 @@ export default async function getMoneyAccount() {
             acc.totalSavings = acc.totalSavings + val._sum.balance;
           }
 
-          if (val.accountType === "credit" || val.accountType === "debt") {
+          if (val.accountType === "creditCard" || val.accountType === "debt") {
             acc.totalDebt = acc.totalDebt + val._sum.balance;
           }
 
