@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
-import useAccountModal from "../../hooks/useAccountModal";
+import useCreditCardModal from "@/app/hooks/useCreditCardModal";
 import AccountTypeSelect from "../inputs/AccountTypeSelect";
 import CurrencySelect from "../inputs/CurrencySelect";
 
-const AccountModal = () => {
+const CreditCardModal = () => {
   const router = useRouter();
-  const accountModal = useAccountModal();
+  const accountModal = useCreditCardModal();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,22 +28,11 @@ const AccountModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
-      accountType: null,
+      accountType: "creditCard",
       balance: 0,
-      currency: null,
+      creditLimit: 0,
     },
   });
-
-  const accountType = watch("accountType");
-  const currency = watch("currency");
-
-  const setCustomValue = (id: string, value: any) => {
-    setValue(id, value, {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    });
-  };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -65,7 +54,7 @@ const AccountModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4 ">
-      <Heading title="Add new account" />
+      <Heading title="Add credit card" />
       <div className="rounded-xl bg-gray-100 px-4 pb-6">
         <Input
           id="name"
@@ -87,14 +76,21 @@ const AccountModal = () => {
           bgColor="gray"
           required
         />
+
+        <Input
+          id="creditLimit"
+          type="number"
+          label="Total Avalible"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          bgColor="gray"
+          required
+        />
         {/* <CurrencySelect
           value={currency}
           onChange={(value) => setCustomValue("currency", value)}
         /> */}
-        <AccountTypeSelect
-          value={accountType}
-          onChange={(value) => setCustomValue("accountType", value)}
-        />
       </div>
     </div>
   );
@@ -113,4 +109,4 @@ const AccountModal = () => {
   );
 };
 
-export default AccountModal;
+export default CreditCardModal;

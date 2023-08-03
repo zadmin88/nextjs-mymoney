@@ -16,7 +16,7 @@ import useAccountModal from "@/app/hooks/useAccountModal";
 const UpdateAccountModal = () => {
   const router = useRouter();
   const updateAccounModal = useUpdateAccountModal();
-  const accountToUpate = useUpdateAccountModal(
+  const accountToUpdate = useUpdateAccountModal(
     (state) => state.accountToUpdate
   );
 
@@ -46,8 +46,8 @@ const UpdateAccountModal = () => {
     });
   };
 
-  if (accountToUpate) {
-    setValue("name", accountToUpate?.name);
+  if (accountToUpdate) {
+    setValue("name", accountToUpdate?.name);
   }
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -55,10 +55,10 @@ const UpdateAccountModal = () => {
 
     let accountTypeToUpdate;
 
-    if (accountType && accountToUpate?.accountType !== accountType.value) {
+    if (accountType && accountToUpdate?.accountType !== accountType.value) {
       accountTypeToUpdate = accountType.value;
     } else {
-      accountTypeToUpdate = accountToUpate?.accountType;
+      accountTypeToUpdate = accountToUpdate?.accountType;
     }
 
     const updateAccountDTO = {
@@ -66,7 +66,7 @@ const UpdateAccountModal = () => {
       accountType: accountTypeToUpdate,
     };
     axios
-      .patch(`/api/accounts/${accountToUpate?.id}`, updateAccountDTO)
+      .patch(`/api/accounts/${accountToUpdate?.id}`, updateAccountDTO)
       .then(() => {
         toast.success("Account was Updated!");
         router.refresh();
@@ -85,7 +85,7 @@ const UpdateAccountModal = () => {
     setIsLoading(true);
 
     axios
-      .delete(`/api/accounts/${accountToUpate?.id}`)
+      .delete(`/api/accounts/${accountToUpdate?.id}`)
       .then(() => {
         toast.success("Account was deleted!");
         router.refresh();
@@ -113,11 +113,14 @@ const UpdateAccountModal = () => {
           errors={errors}
           required
         />
-
-        <AccountTypeSelect
-          value={accountType}
-          onChange={(value) => setCustomValue("accountType", value)}
-        />
+        {accountToUpdate?.accountType !== "creditCard" ? (
+          <AccountTypeSelect
+            value={accountType}
+            onChange={(value) => setCustomValue("accountType", value)}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

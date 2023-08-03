@@ -112,21 +112,21 @@ const MovementModal = () => {
       <div className="flex flex-col gap-4">
         <div className="flex gap-4 mb-12">
           <Button
-            label="Ingreso"
+            label="Income"
             rounded
             onClick={() => setMovType("income")}
             color={movType === "income" ? "" : "inactive"}
             small
           />
           <Button
-            label="Gasto"
+            label="Spend"
             rounded
             onClick={() => setMovType("outcome")}
             color={movType === "outcome" ? "" : "inactive"}
             small
           />
           <Button
-            label="Transferencia"
+            label="Transfer"
             rounded
             onClick={() => setMovType("transfer")}
             color={movType === "transfer" ? "" : "inactive"}
@@ -136,16 +136,16 @@ const MovementModal = () => {
         <Heading
           title={
             movType === "outcome"
-              ? "Gasto"
+              ? "Spend"
               : movType === "income"
-              ? "Ingreso"
-              : "Transferencia"
+              ? "Income"
+              : "Transfer"
           }
         />
         <div className="rounded-xl bg-gray-100 px-4 pb-6">
           <Input
             id="description"
-            label="descripción"
+            label="Description"
             bgColor="gray"
             disabled={isLoading}
             register={register}
@@ -156,7 +156,7 @@ const MovementModal = () => {
           <Input
             id="amount"
             type="number"
-            label="Valor"
+            label="Amount"
             bgColor="gray"
             disabled={isLoading}
             register={register}

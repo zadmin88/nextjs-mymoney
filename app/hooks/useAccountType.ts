@@ -1,6 +1,6 @@
 const accountTypes = [
   { value: "saving", label: "Savings" },
-  { value: "creditCard", label: "Credit Card" },
+  // { value: "creditCard", label: "Credit Card" },
   { value: "cash", label: "Cash" },
   { value: "investment", label: "Investment" },
   { value: "debt", label: "debt" },

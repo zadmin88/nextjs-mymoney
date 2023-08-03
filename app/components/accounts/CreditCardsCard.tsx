@@ -3,25 +3,29 @@
 import React from "react";
 import Button from "../buttons/Button";
 import AccountModal from "../modals/AccountModal";
-import useAccountModal from "../../hooks/useAccountModal";
+import useCreditCardModal from "@/app/hooks/useCreditCardModal";
 import AccountCardItem from "./AccountCardItem";
 import Image from "next/image";
 import Router from "next/router";
 
-const AccountsCard: React.FC<any> = ({ regularAccounts }) => {
-  const accountModal = useAccountModal();
+const CreditCardsCard: React.FC<any> = ({ creditCards }) => {
+  const creditCardModal = useCreditCardModal();
 
-  if (regularAccounts.length === 0) {
+  if (creditCards.length === 0) {
     return (
       <div className="bg-white rounded-2xl py-4 px-6">
-        <Button rounded label="Create account" onClick={accountModal.onOpen} />
+        <Button
+          rounded
+          label="Create credit card"
+          onClick={creditCardModal.onOpen}
+        />
       </div>
     );
   }
 
   return (
     <div className="bg-white rounded-2xl py-4 px-6">
-      <div onClick={accountModal.onOpen} className="flex gap-8 mb-4 ">
+      <div onClick={creditCardModal.onOpen} className="flex gap-8 mb-4 ">
         <Image
           src="/icons/addNewItemVector.png"
           alt="add icon"
@@ -30,9 +34,9 @@ const AccountsCard: React.FC<any> = ({ regularAccounts }) => {
           className="h-6 w-6"
         />
 
-        <span className="text-base">Add another account</span>
+        <span className="text-base">Add credit card</span>
       </div>
-      {regularAccounts.map((account: any) => (
+      {creditCards.map((account: any) => (
         <AccountCardItem
           key={account.id}
           id={account.id}
@@ -46,4 +50,4 @@ const AccountsCard: React.FC<any> = ({ regularAccounts }) => {
   );
 };
 
-export default AccountsCard;
+export default CreditCardsCard;

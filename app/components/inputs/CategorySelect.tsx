@@ -20,7 +20,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ value, onChange }) => {
   return (
     <div>
       <Select
-        placeholder="Categoria"
+        placeholder="Category"
         isClearable
         unstyled
         options={getAll()}

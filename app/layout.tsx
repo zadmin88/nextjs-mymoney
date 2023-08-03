@@ -6,6 +6,7 @@ import RegisterModal from "./components/modals/RegisteModal";
 import MovementModal from "./components/modals/MovementModal";
 import UpdateMovementModal from "./components/modals/UpdateMovementModal";
 import UpdateAccountModal from "./components/modals/UpdateAccountModal";
+import CreditCardModal from "./components/modals/CreditCardModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import Navbar from "./components/navbar/Navbar";
 import AccountModal from "./components/modals/AccountModal";
@@ -33,6 +34,7 @@ export default function RootLayout({
           <UpdateMovementModal />
           <AccountSelectionModal />
           <UpdateAccountModal />
+          <CreditCardModal />
           <ToasterProvider />
           <LoginModal />
           <RegisterModal />

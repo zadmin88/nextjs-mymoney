@@ -24,7 +24,11 @@ const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
 
   useEffect(() => {
     const accounts = moneyAccounts.moneyAccounts.map((acc: any) => {
-      return { name: acc.name, accountType: acc.accountType, id: acc.id };
+      return {
+        name: acc.name,
+        accountType: acc.accountType,
+        id: acc.id,
+      };
     });
 
     setAccountList(accounts);
@@ -68,24 +72,40 @@ const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
         >
           <div className="flex flex-col justify-center items-center">
             <span className="text-base font-semibold text-white">
-              Balance Total
+              {safeMoneyAccount.creditLimit ? "Total debt" : "Total Balance"}
             </span>
             <span className="text-base font-semibold text-brand-lime">
               $ {safeMoneyAccount?.balance}
             </span>
           </div>
         </div>
+        {safeMoneyAccount.creditLimit ? (
+          <div
+            className={`flex py-3 gap-4  pl-4 items-center bg-gray-100 rounded-2xl justify-center`}
+          >
+            <div className="flex flex-col justify-center items-center">
+              <span className="text-base font-semibold text-gray-900">
+                Credit iimit
+              </span>
+              <span className="text-base  text-gray-900">
+                $ {safeMoneyAccount?.creditLimit}
+              </span>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
 
         <div className="flex justify-evenly gap-4">
           <TotalCardItem
             bgColor="bg-gray-100"
-            name="Ingresos"
+            name={safeMoneyAccount.creditLimit ? "Payment" : "Income"}
             icon={`/icons/moneyAccount/incomeVector.svg`}
             balance={totals?.totalIncomes}
           />
           <TotalCardItem
             bgColor="bg-gray-100"
-            name="Gastos"
+            name={"Spend"}
             icon={`/icons/moneyAccount/outcomeVector.svg`}
             balance={totals?.totalOutcomes}
           />
@@ -95,7 +115,7 @@ const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
           <div className="bg-white rounded-2xl py-2 mt-4 px-6">
             <Button
               rounded
-              label="Agregar un movimiento"
+              label="Add movement"
               onClick={movementModal.onOpen}
             />
           </div>
