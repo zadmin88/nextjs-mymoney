@@ -121,7 +121,7 @@ const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
           </div>
 
           <h1 className="text-lg text-gray-900 font-bold pt-6 mb-6  ">
-            Movimientos
+            Movements
           </h1>
 
           <div className="flex flex-col gap-4">

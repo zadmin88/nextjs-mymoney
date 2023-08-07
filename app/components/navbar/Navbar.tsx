@@ -37,28 +37,28 @@ const Navbar = () => {
           "
           >
             <NavButton
-              label="Inicio"
+              label="Home"
               activeVector="/icons/vectorHomeActive.png"
               inactiveVector="/icons/vectorHomeInactive.png"
               onClick={handleClick}
               selected={pathName === "/"}
             />
             <NavButton
-              label="Agregar"
+              label="Add"
               activeVector="/icons/vectorAddActive.png"
               inactiveVector="/icons/vectorAddInactive.png"
               onClick={handleClick}
               selected={pathName === "/agregar"}
             />
             <NavButton
-              label="Movimientos"
+              label="Movements"
               activeVector="/icons/vectorMovementsActive.png"
               inactiveVector="/icons/vectorMovementsInactive.png"
               onClick={handleClick}
               selected={pathName === "/movimientos"}
             />
             <NavButton
-              label="Categorias"
+              label="Categories"
               activeVector="/icons/vectorCategoriesActive.png"
               inactiveVector="/icons/vectorCategoriesInactive.png"
               onClick={handleClick}

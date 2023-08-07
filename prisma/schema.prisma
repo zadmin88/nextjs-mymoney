@@ -24,6 +24,7 @@ model User {
   accounts Account[]
   moneyAccounts MoneyAccount[]
   movements Movement[]
+  budgets Budget[]
 }
 
 model Account {
@@ -58,6 +59,23 @@ model MoneyAccount {
   movements    Movement[] 
 }
 
+model Budget {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String    
+  fromDate     DateTime 
+  toDate       DateTime 
+  isActive     Boolean   
+  balance      Float     @default(0)
+  totalBudget  Float
+  creditLimit  Float?
+  currency     String    @default("COP")
+  userId       String @db.ObjectId
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movements    Movement[] 
+}
+
+
 
 model Movement {
   id                    String @id @default(auto()) @map("_id") @db.ObjectId
@@ -74,10 +92,12 @@ model Movement {
   updatedAt             DateTime @updatedAt
   accountId             String @db.ObjectId
   userId                String @db.ObjectId
+  budgetId              String? @db.ObjectId
 
   account MoneyAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   transfer Transfer?
+  budget Budget? @relation(fields: [budgetId], references: [id], onDelete: Cascade)
 }
 
 model Transfer {

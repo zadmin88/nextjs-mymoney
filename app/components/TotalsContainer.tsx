@@ -18,22 +18,22 @@ const TotalsContainer: React.FC<any> = ({ moneyAccounts, currentUser }) => {
       </h1>
       <div className="grid grid-cols-2 gap-4">
         <TotalCardItem
-          name="Disponible"
+          name="Avalible"
           balance={totalAvalible.totalAvalible}
           icon={`/icons/totals/totalAvalible.png`}
         />
         <TotalCardItem
-          name="Ahorros"
+          name="Savings"
           balance={totalAvalible.totalSavings}
           icon={`/icons/totals/totalSavings.png`}
         />
         <TotalCardItem
-          name="Deuda"
+          name="Debt"
           balance={totalAvalible.totalDebt}
           icon={`/icons/totals/totalDebt.png`}
         />
         <TotalCardItem
-          name="Inversiones"
+          name="Investment"
           balance={totalAvalible.totalInvestment}
           icon={`/icons/totals/totalInvestment.png`}
         />
