@@ -4,11 +4,12 @@ import React from "react";
 import AccountsCard from "./AccountsCard";
 import CreditCardsCard from "./CreditCardsCard";
 import useAccountsList from "@/app/hooks/useAccountsList";
+import BudgetCard from "../budgets/BudgetCard";
 import { useEffect } from "react";
 
-const AccountsContainer: React.FC<any> = ({ moneyAccounts }) => {
+const AccountsContainer: React.FC<any> = ({ moneyAccounts, userBudgets }) => {
   const setAccountList = useAccountsList((state) => state.setAccountList);
-
+  const { budgets } = userBudgets;
   const { regularAccounts, creditCards, accounts } =
     moneyAccounts.moneyAccounts.reduce(
       (obj: any, acc: any) => {
@@ -41,6 +42,8 @@ const AccountsContainer: React.FC<any> = ({ moneyAccounts }) => {
         Credit cards
       </h1>
       <CreditCardsCard creditCards={creditCards} />
+      <h1 className="text-lg text-gray-900 font-bold pt-6 mb-4  ">Budgets</h1>
+      <BudgetCard budgets={budgets} />
     </div>
   );
 };

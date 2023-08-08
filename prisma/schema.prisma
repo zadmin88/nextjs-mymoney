@@ -64,11 +64,8 @@ model Budget {
   name         String    
   fromDate     DateTime 
   toDate       DateTime 
-  isActive     Boolean   
   balance      Float     @default(0)
-  totalBudget  Float
-  creditLimit  Float?
-  currency     String    @default("COP")
+  totalBudget  Float     @default(0)
   userId       String @db.ObjectId
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

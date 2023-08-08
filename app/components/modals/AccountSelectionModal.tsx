@@ -29,7 +29,7 @@ const AccountSelectionModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Cuentas" />
+      <Heading title="Accounts" />
       {accountList?.length !== 0 &&
         accountList?.map((acc) => (
           <AccountListCard
