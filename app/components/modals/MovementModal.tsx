@@ -21,6 +21,7 @@ const MovementModal = () => {
   const params = useParams();
 
   const moneyAccountId = params?.moneyAccountId;
+  const budgetId = params?.budgetId;
 
   const [isLoading, setIsLoading] = useState(false);
   const [movType, setMovType] = useState("outcome");
@@ -64,8 +65,8 @@ const MovementModal = () => {
         isTransfer: movType === "transfer" ? true : false,
         category: category.value,
         icon: category.icon,
-        accountId: moneyAccountId,
-        budgetId: budget.value ? budget.value : null,
+        accountId: moneyAccountId ? moneyAccountId : account?.value,
+        budgetId: budget?.value ? budget?.value : budgetId ? budgetId : null,
       };
 
       axios
@@ -116,26 +117,35 @@ const MovementModal = () => {
       <div className="flex flex-col gap-4">
         <div className="flex gap-4 mb-12">
           <Button
-            label="Income"
-            rounded
-            onClick={() => setMovType("income")}
-            color={movType === "income" ? "" : "inactive"}
-            small
-          />
-          <Button
             label="Spend"
             rounded
             onClick={() => setMovType("outcome")}
             color={movType === "outcome" ? "" : "inactive"}
             small
           />
-          <Button
-            label="Transfer"
-            rounded
-            onClick={() => setMovType("transfer")}
-            color={movType === "transfer" ? "" : "inactive"}
-            small
-          />
+          {!budgetId ? (
+            <Button
+              label="Income"
+              rounded
+              onClick={() => setMovType("income")}
+              color={movType === "income" ? "" : "inactive"}
+              small
+            />
+          ) : (
+            ""
+          )}
+
+          {!budgetId ? (
+            <Button
+              label="Transfer"
+              rounded
+              onClick={() => setMovType("transfer")}
+              color={movType === "transfer" ? "" : "inactive"}
+              small
+            />
+          ) : (
+            ""
+          )}
         </div>
         <Heading
           title={
@@ -167,11 +177,19 @@ const MovementModal = () => {
             errors={errors}
             required
           />
+          {!moneyAccountId ? (
+            <AccountsSelect
+              value={account}
+              onChange={(value) => setCustomValue("account", value)}
+            />
+          ) : (
+            ""
+          )}
           <CategorySelect
             value={category}
             onChange={(value) => setCustomValue("category", value)}
           />
-          {movType === "outcome" ? (
+          {movType === "outcome" && !budgetId ? (
             <BudgetSelect
               value={budget}
               onChange={(value) => setCustomValue("budget", value)}
@@ -187,19 +205,20 @@ const MovementModal = () => {
       <div className="flex flex-col gap-4">
         <div className="flex gap-4 mb-12">
           <Button
-            label="Income"
-            rounded
-            onClick={() => setMovType("income")}
-            color={"inactive"}
-            small
-          />
-          <Button
             label="Spend"
             rounded
             onClick={() => setMovType("outcome")}
             color={"inactive"}
             small
           />
+          <Button
+            label="Income"
+            rounded
+            onClick={() => setMovType("income")}
+            color={"inactive"}
+            small
+          />
+
           <Button
             label="Transfer"
             rounded
