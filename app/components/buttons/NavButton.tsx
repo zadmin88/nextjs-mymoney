@@ -29,7 +29,7 @@ const NavButton: React.FC<ButtonProps> = ({
         width={100}
         className="h-6 w-6"
       />
-      <span className={`text-brand-teal text-xs               `}>{label}</span>
+      <span className={`text-brand-teal text-xs`}>{label}</span>
     </button>
   );
 };

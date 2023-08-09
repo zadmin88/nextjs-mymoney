@@ -59,13 +59,13 @@ const UpdateBudgetModal = () => {
     axios
       .patch(`/api/budgets/${budgetToUpdate?.id}`, data)
       .then(() => {
-        toast.success("Movimiento Actualizado!");
+        toast.success("Budget has been updated!");
         router.refresh();
         updateBudgetModal.onClose();
         reset();
       })
       .catch((error) => {
-        toast.error("Algo salío mal");
+        toast.error("Something went wrong");
       })
       .finally(() => {
         setIsLoading(false);
@@ -78,13 +78,13 @@ const UpdateBudgetModal = () => {
     axios
       .delete(`/api/budgets/${budgetToUpdate?.id}`)
       .then(() => {
-        toast.success("Account was deleted!");
+        toast.success("Budget was deleted!");
         router.refresh();
         reset();
         updateBudgetModal.onClose();
       })
       .catch((error) => {
-        toast.error("Somthing went wrong");
+        toast.error("Something went wrong");
       })
       .finally(() => {
         setIsLoading(false);
@@ -93,7 +93,7 @@ const UpdateBudgetModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title={"Editar movimiento"} />
+      <Heading title={"Edit budget"} />
       <Input
         id="name"
         label="Name"
