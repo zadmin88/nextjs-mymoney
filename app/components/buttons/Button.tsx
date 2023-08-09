@@ -1,6 +1,7 @@
 "use client";
 
 import { IconType } from "react-icons";
+import Image from "next/image";
 
 interface ButtonProps {
   label: string;
@@ -9,6 +10,7 @@ interface ButtonProps {
   disabled?: boolean;
   rounded?: boolean;
   icon?: IconType;
+  iconSrc?: string;
   small?: boolean;
 }
 
@@ -19,21 +21,27 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   rounded,
   icon: Icon,
+  iconSrc,
   small,
 }) => {
+  console.log(iconSrc);
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`       
+      className={`   
+          
         font-semibold
-        relative
+        flex
+        justify-center
+        gap-4
         disabled:bg-gray-300
         disabled:cursor-not-allowed               
          sm:hover:bg-gray-300
          sm:hover:text-white 
         transition
-        w-full        
+        w-full      
+        text-center  
         ${small ? "py-2 px-2" : "py-4"}
         ${rounded ? "rounded-full" : "rounded-lg"}
         ${
@@ -51,7 +59,7 @@ const Button: React.FC<ButtonProps> = ({
         }
         `}
     >
-      {Icon && (
+      {/* {Icon && (
         <Icon
           size={24}
           className="
@@ -59,6 +67,15 @@ const Button: React.FC<ButtonProps> = ({
             left-4
             top-3
           "
+        />
+      )} */}
+      {iconSrc && (
+        <Image
+          src={iconSrc}
+          alt="icon"
+          height={100}
+          width={100}
+          className="h-6 w-6 "
         />
       )}
       {label}

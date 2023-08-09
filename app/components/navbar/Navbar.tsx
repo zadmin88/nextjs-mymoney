@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed w-full bottom-0 bg-white z-10 shadow-sm ">
-      <div className="py-4 border-t">
+      <div className="py-5 border-t">
         <Container>
           <div
             className="

@@ -12,7 +12,7 @@ export default async function Home() {
   const userBudgets = await getBudgets();
 
   return (
-    <div className="bg-brand-lime">
+    <div className="bg-brand-lime h-full">
       <ClientOnly>
         <Container>
           <TotalsContainer

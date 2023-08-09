@@ -111,18 +111,19 @@ const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
           />
         </div>
 
-        <div>
-          <div className="bg-white rounded-2xl py-2 mt-4 px-6">
+        <div className="mb-6">
+          <h1 className="text-lg text-gray-900 font-bold pt-6 mb-3  ">
+            Movements
+          </h1>
+
+          <div className="bg-white rounded-2xl py-2 my-4 px-6">
             <Button
               rounded
               label="Add movement"
               onClick={movementModal.onOpen}
+              iconSrc={"/icons/addNewItemVector.png"}
             />
           </div>
-
-          <h1 className="text-lg text-gray-900 font-bold pt-6 mb-6  ">
-            Movements
-          </h1>
 
           <div className="flex flex-col gap-4">
             {safeMoneyAccount?.movements.map((mov: any) => (
