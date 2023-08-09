@@ -42,7 +42,7 @@ const categories = [
   },
   {
     value: "traveling",
-    icon: "/icons/categories/travelingVector.png",
+    icon: "/icons/categories/travellingVector.png",
     label: "Viajes",
   },
   {
