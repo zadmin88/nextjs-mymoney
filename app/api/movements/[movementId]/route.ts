@@ -51,7 +51,7 @@ export async function DELETE(
     }
 
     if (movement.movementType === "outcome") {
-      const updatedAccount = await prisma.moneyAccount.update({
+      await prisma.moneyAccount.update({
         where: {
           id: movement.accountId,
         },
@@ -61,6 +61,19 @@ export async function DELETE(
           },
         },
       });
+
+      if (movement.budgetId) {
+        await prisma.budget.update({
+          where: {
+            id: movement.budgetId,
+          },
+          data: {
+            balance: {
+              decrement: +movement.amount,
+            },
+          },
+        });
+      }
     }
   }
 
@@ -126,7 +139,7 @@ export async function PATCH(request: Request, { params }: { params: IParams }) {
   }
 
   if (movement?.movementType === "outcome") {
-    const deleteMovement = await prisma.moneyAccount.update({
+    await prisma.moneyAccount.update({
       where: {
         id: movement.accountId,
       },
@@ -137,7 +150,7 @@ export async function PATCH(request: Request, { params }: { params: IParams }) {
       },
     });
 
-    const updatedAccount = await prisma.moneyAccount.update({
+    await prisma.moneyAccount.update({
       where: {
         id: movement.accountId,
       },
@@ -147,6 +160,30 @@ export async function PATCH(request: Request, { params }: { params: IParams }) {
         },
       },
     });
+
+    if (movement.budgetId) {
+      await prisma.budget.update({
+        where: {
+          id: movement.budgetId,
+        },
+        data: {
+          balance: {
+            decrement: +movement.amount,
+          },
+        },
+      });
+
+      await prisma.budget.update({
+        where: {
+          id: movement.budgetId,
+        },
+        data: {
+          balance: {
+            increment: +amount,
+          },
+        },
+      });
+    }
   }
 
   return NextResponse.json(uptadetMovement);
