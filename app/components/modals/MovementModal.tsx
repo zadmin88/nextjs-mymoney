@@ -11,6 +11,7 @@ import Input from "../inputs/Input";
 import useMovementModal from "@/app/hooks/useMovementModal";
 import CategorySelect from "../inputs/CategorySelect";
 import AccountsSelect from "../inputs/AccountsSelect";
+import BudgetSelect from "../inputs/BudgetsSelect";
 import Button from "../buttons/Button";
 import { useParams } from "next/navigation";
 
@@ -37,11 +38,13 @@ const MovementModal = () => {
       amount: 0,
       category: null,
       account: null,
+      budget: null,
     },
   });
 
   const category = watch("category");
   const account = watch("account");
+  const budget = watch("budget");
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -62,6 +65,7 @@ const MovementModal = () => {
         category: category.value,
         icon: category.icon,
         accountId: moneyAccountId,
+        budgetId: budget.value ? budget.value : null,
       };
 
       axios
@@ -167,6 +171,14 @@ const MovementModal = () => {
             value={category}
             onChange={(value) => setCustomValue("category", value)}
           />
+          {movType === "outcome" ? (
+            <BudgetSelect
+              value={budget}
+              onChange={(value) => setCustomValue("budget", value)}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );
@@ -175,33 +187,33 @@ const MovementModal = () => {
       <div className="flex flex-col gap-4">
         <div className="flex gap-4 mb-12">
           <Button
-            label="Ingreso"
+            label="Income"
             rounded
             onClick={() => setMovType("income")}
             color={"inactive"}
             small
           />
           <Button
-            label="Gasto"
+            label="Spend"
             rounded
             onClick={() => setMovType("outcome")}
             color={"inactive"}
             small
           />
           <Button
-            label="Transferencia"
+            label="Transfer"
             rounded
             onClick={() => setMovType("transfer")}
             color={movType === "transfer" ? "" : "inactive"}
             small
           />
         </div>
-        <Heading title={"Transferencia"} />
+        <Heading title={"Transfer"} />
         <div className="rounded-xl bg-gray-100 px-4 pb-6">
           <Input
             id="amount"
             type="number"
-            label="Valor"
+            label="Amount"
             bgColor="gray"
             disabled={isLoading}
             register={register}

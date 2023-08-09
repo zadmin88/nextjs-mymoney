@@ -1,37 +1,37 @@
 "use client";
 
 import Select from "react-select";
-import useAccountsList from "@/app/hooks/useAccountsList";
+import useBudgetList from "@/app/hooks/useBudgetList";
 import Image from "next/image";
-export type AccountsSelectValue = {
+export type BudgetSelectValue = {
   value: string;
   label: string;
   icon: string;
 };
 
-interface AccountsSelectProps {
-  value?: AccountsSelectValue;
-  onChange: (value: AccountsSelectValue) => void;
+interface BudgetSelectProps {
+  value?: BudgetSelectValue;
+  onChange: (value: BudgetSelectValue) => void;
 }
 
-const AccountsSelect: React.FC<AccountsSelectProps> = ({ value, onChange }) => {
-  const accountList = useAccountsList((state) => state.accountList);
+const BudgetSelect: React.FC<BudgetSelectProps> = ({ value, onChange }) => {
+  const budgetList = useBudgetList((state) => state.budgetList);
 
-  const options = accountList?.map((account: any) => ({
-    value: account.id,
-    label: account.name,
-    icon: `/icons/moneyAccount/${account.accountType}Vector.png`,
+  const options = budgetList?.map((budget: any) => ({
+    value: budget.id,
+    label: budget.name,
+    icon: `/icons/moneyAccount/budgetVector.png`,
   }));
 
   return (
     <div>
       <Select
-        placeholder="Account"
+        placeholder="Active budgets"
         isClearable
         unstyled
         options={options}
         value={value}
-        onChange={(value) => onChange(value as AccountsSelectValue)}
+        onChange={(value) => onChange(value as BudgetSelectValue)}
         formatOptionLabel={(option: any) => (
           <div
             className="
@@ -66,4 +66,4 @@ const AccountsSelect: React.FC<AccountsSelectProps> = ({ value, onChange }) => {
   );
 };
 
-export default AccountsSelect;
+export default BudgetSelect;

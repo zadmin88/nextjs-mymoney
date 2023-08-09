@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     isTransfer,
     movementType,
     accountId,
+    budgetId,
   } = body;
 
   if (!currentUser) {
@@ -42,11 +43,12 @@ export async function POST(request: Request) {
       movementType,
       userId: currentUser.id,
       accountId,
+      budgetId,
     },
   });
 
   if (movementType === "income") {
-    const updatedAccount = await prisma.moneyAccount.update({
+    await prisma.moneyAccount.update({
       where: {
         id: accountId,
       },
@@ -59,7 +61,7 @@ export async function POST(request: Request) {
   }
 
   if (movementType === "outcome") {
-    const updatedAccount = await prisma.moneyAccount.update({
+    await prisma.moneyAccount.update({
       where: {
         id: accountId,
       },
@@ -69,6 +71,19 @@ export async function POST(request: Request) {
         },
       },
     });
+
+    if (budgetId) {
+      await prisma.budget.update({
+        where: {
+          id: budgetId,
+        },
+        data: {
+          balance: {
+            increment: +amount,
+          },
+        },
+      });
+    }
   }
 
   return NextResponse.json(movement);

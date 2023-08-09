@@ -4,12 +4,19 @@ import React from "react";
 import AccountsCard from "./AccountsCard";
 import CreditCardsCard from "./CreditCardsCard";
 import useAccountsList from "@/app/hooks/useAccountsList";
+import useBudgetList from "@/app/hooks/useBudgetList";
 import BudgetCard from "../budgets/BudgetCard";
 import { useEffect } from "react";
 
 const AccountsContainer: React.FC<any> = ({ moneyAccounts, userBudgets }) => {
   const setAccountList = useAccountsList((state) => state.setAccountList);
+  const setBudgetList = useBudgetList((state) => state.setBudgetList);
   const { budgets } = userBudgets;
+  const budgetList = budgets.map((bdget: any) => ({
+    id: bdget.id,
+    name: bdget.name,
+  }));
+
   const { regularAccounts, creditCards, accounts } =
     moneyAccounts.moneyAccounts.reduce(
       (obj: any, acc: any) => {
@@ -30,7 +37,8 @@ const AccountsContainer: React.FC<any> = ({ moneyAccounts, userBudgets }) => {
 
   useEffect(() => {
     setAccountList(accounts);
-  }, [accounts, setAccountList]);
+    setBudgetList(budgetList);
+  }, [accounts, setAccountList, setBudgetList, budgetList]);
 
   return (
     <div className="bg-slate-100  px-6 pb-6 rounded-t-3xl h-full">

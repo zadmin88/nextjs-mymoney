@@ -29,7 +29,13 @@ const BudgetCardItem: React.FC<BudgetCardItemProps> = ({ budget }) => {
         onClick={() => router.push(`/budgets/${budget.id}`)}
         className="flex py-4 gap-8  items-center bg-white"
       >
-        <FcMoneyTransfer className="h-6 w-6" />
+        <Image
+          src={`/icons/moneyAccount/budgetVector.png`}
+          alt={"budget"}
+          height={100}
+          width={100}
+          className="h-6 w-6"
+        />
         <div className="flex flex-col">
           <span className="text-base font-semibold">{budget.name}</span>
           <span className="text-sm">
