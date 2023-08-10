@@ -49,7 +49,7 @@ const MoneyAccountClient: React.FC<any> = ({
   }, [setAccountList, moneyAccounts.moneyAccounts, setBudgetList]);
 
   return (
-    <div className="px-6 mt-8">
+    <div className="px-6 mt-8 bg-white">
       <div className="flex justify-between">
         <Image
           src="/icons/navigation/backArrowVector.svg"

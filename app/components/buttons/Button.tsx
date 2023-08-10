@@ -24,7 +24,6 @@ const Button: React.FC<ButtonProps> = ({
   iconSrc,
   small,
 }) => {
-  console.log(iconSrc);
   return (
     <button
       disabled={disabled}

@@ -44,7 +44,7 @@ export default function RootLayout({
           <RegisterModal />
           <Navbar />
         </ClientOnly>
-        <div className="pb-20 bg-neutral-100">{children}</div>
+        <div className="pb-20 ">{children}</div>
       </body>
     </html>
   );

@@ -40,12 +40,14 @@ const MovementModal = () => {
       category: null,
       account: null,
       budget: null,
+      accountFrom: null,
     },
   });
 
   const category = watch("category");
   const account = watch("account");
   const budget = watch("budget");
+  const accountFrom = watch("accountFrom");
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -89,7 +91,7 @@ const MovementModal = () => {
         isTransfer: true,
         category: "transfer",
         icon: "/icons/categories/transferVector.png",
-        accountId: moneyAccountId,
+        accountId: moneyAccountId ? moneyAccountId : accountFrom.value,
         transferToAccount: account.value,
       };
 
@@ -239,6 +241,15 @@ const MovementModal = () => {
             errors={errors}
             required
           />
+          {!moneyAccountId ? (
+            <AccountsSelect
+              label={"Account from"}
+              value={accountFrom}
+              onChange={(value) => setCustomValue("accountFrom", value)}
+            />
+          ) : (
+            ""
+          )}
           <AccountsSelect
             value={account}
             onChange={(value) => setCustomValue("account", value)}

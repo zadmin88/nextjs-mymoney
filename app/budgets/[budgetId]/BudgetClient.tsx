@@ -19,7 +19,7 @@ const BudgetClient: React.FC<any> = ({ data }) => {
   const percentage = (safeBudget.balance * 100) / safeBudget.totalBudget;
 
   return (
-    <div className="px-6 mt-8">
+    <div className="px-6 mt-8 bg-white">
       <div className="flex justify-between">
         <Image
           src="/icons/navigation/backArrowVector.svg"

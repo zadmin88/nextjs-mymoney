@@ -12,9 +12,14 @@ export type AccountsSelectValue = {
 interface AccountsSelectProps {
   value?: AccountsSelectValue;
   onChange: (value: AccountsSelectValue) => void;
+  label?: string;
 }
 
-const AccountsSelect: React.FC<AccountsSelectProps> = ({ value, onChange }) => {
+const AccountsSelect: React.FC<AccountsSelectProps> = ({
+  value,
+  onChange,
+  label,
+}) => {
   const accountList = useAccountsList((state) => state.accountList);
 
   const options = accountList?.map((account: any) => ({
@@ -26,7 +31,7 @@ const AccountsSelect: React.FC<AccountsSelectProps> = ({ value, onChange }) => {
   return (
     <div>
       <Select
-        placeholder="Account"
+        placeholder={label ? label : "Account"}
         isClearable
         unstyled
         options={options}

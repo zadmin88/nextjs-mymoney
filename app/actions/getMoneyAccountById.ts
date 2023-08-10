@@ -63,10 +63,21 @@ export default async function getMoneyAccountById(IParams: IParams) {
     //   { totalAvalible: 0, totalSavings: 0, totalDebt: 0, totalInvestment: 0 }
     // );
 
+    // const moneyAccount = await prisma.moneyAccount.findUnique({
+    //   where: query,
+    //   include: {
+    //     movements: true,
+    //   },
+    // });
+
     const moneyAccount = await prisma.moneyAccount.findUnique({
       where: query,
       include: {
-        movements: true,
+        movements: {
+          orderBy: {
+            createdAt: "desc", // Replace with the field you want to sort by ('asc' for ascending, 'desc' for descending)
+          },
+        },
       },
     });
 
