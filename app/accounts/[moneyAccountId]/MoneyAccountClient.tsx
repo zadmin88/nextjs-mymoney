@@ -10,14 +10,26 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import useAccountsList from "@/app/hooks/useAccountsList";
+import useBudgetList from "@/app/hooks/useBudgetList";
 interface MoneyAccountProps {
   moneyAccount: MoneyAccount;
 }
 
-const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
+const MoneyAccountClient: React.FC<any> = ({
+  data,
+  moneyAccounts,
+  userBudgets,
+}) => {
   const { setAccountList, accountList } = useAccountsList((state) => state);
   const movementModal = useMovementModal();
   const accountSelectionModal = useAccountSelectionModal();
+
+  const setBudgetList = useBudgetList((state) => state.setBudgetList);
+  const { budgets } = userBudgets;
+  const budgetList = budgets.map((bdget: any) => ({
+    id: bdget.id,
+    name: bdget.name,
+  }));
 
   const { safeMoneyAccount, totals } = data;
   const router = useRouter();
@@ -32,7 +44,9 @@ const MoneyAccountClient: React.FC<any> = ({ data, moneyAccounts }) => {
     });
 
     setAccountList(accounts);
-  }, [setAccountList, moneyAccounts.moneyAccounts]);
+    setBudgetList(budgetList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setAccountList, moneyAccounts.moneyAccounts, setBudgetList]);
 
   return (
     <div className="px-6 mt-8">
