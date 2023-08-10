@@ -35,7 +35,7 @@ const AccountsSelect: React.FC<AccountsSelectProps> = ({ value, onChange }) => {
         formatOptionLabel={(option: any) => (
           <div
             className="
-          flex flex-row items-center gap-3 bg-gray-100 rounded-md  py-2"
+          flex flex-row items-center gap-3 bg-gray-100 rounded-md  py-2 mx-4 px-2"
           >
             <Image
               src={option?.icon}

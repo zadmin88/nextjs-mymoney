@@ -35,7 +35,7 @@ const BudgetSelect: React.FC<BudgetSelectProps> = ({ value, onChange }) => {
         formatOptionLabel={(option: any) => (
           <div
             className="
-          flex flex-row items-center gap-3 bg-gray-100 rounded-md  py-2"
+          flex flex-row items-center gap-3 bg-gray-100 rounded-md  py-2 px-4 mx-4"
           >
             <Image
               src={option?.icon}
