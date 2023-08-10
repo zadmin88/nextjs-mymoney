@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const handleClick = useCallback(
     (url: string) => {
-      const urlTo = `/${url === "Inicio" ? "" : url.toLowerCase()}`;
+      const urlTo = `/${url === "Home" ? "/" : url.toLowerCase()}`;
 
       // console.log(urlTo)
       router.push(urlTo);
@@ -48,7 +48,7 @@ const Navbar = () => {
               activeVector="/icons/vectorAddActive.png"
               inactiveVector="/icons/vectorAddInactive.png"
               onClick={handleClick}
-              selected={pathName === "/agregar"}
+              selected={pathName === "/add"}
             />
             <NavButton
               label="Movements"
