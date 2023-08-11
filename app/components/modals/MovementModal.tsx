@@ -36,7 +36,7 @@ const MovementModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       description: "",
-      amount: 0,
+      amount: "",
       category: null,
       account: null,
       budget: null,
@@ -264,7 +264,7 @@ const MovementModal = () => {
       color="lime"
       disabled={isLoading}
       isOpen={movementModal.isOpen}
-      actionLabel="+ Agregar"
+      actionLabel="+ Add"
       onClose={movementModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}

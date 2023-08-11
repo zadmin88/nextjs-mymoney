@@ -69,7 +69,7 @@ const CreditCardModal = () => {
         <Input
           id="balance"
           type="number"
-          label="Initial amount"
+          label="Debt"
           disabled={isLoading}
           register={register}
           errors={errors}
@@ -80,7 +80,7 @@ const CreditCardModal = () => {
         <Input
           id="creditLimit"
           type="number"
-          label="Total Avalible"
+          label="Total credit"
           disabled={isLoading}
           register={register}
           errors={errors}

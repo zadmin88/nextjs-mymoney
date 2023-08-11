@@ -28,8 +28,8 @@ const BudgetModal = () => {
       name: "",
       fromDate: "",
       toDate: "",
-      balance: 0,
-      totalBudget: 0,
+      balance: "",
+      totalBudget: "",
     },
   });
 
@@ -78,7 +78,7 @@ const BudgetModal = () => {
         <Input
           id="balance"
           type="number"
-          label="Initial amount"
+          label="Spent amount"
           disabled={isLoading}
           register={register}
           errors={errors}

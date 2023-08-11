@@ -29,7 +29,7 @@ const AccountModal = () => {
     defaultValues: {
       name: "",
       accountType: null,
-      balance: 0,
+      balance: "",
       currency: null,
     },
   });
