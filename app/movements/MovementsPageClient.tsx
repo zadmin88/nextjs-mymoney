@@ -5,20 +5,38 @@ import React from "react";
 import MovementCard from "../components/movements/MovementCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState, useEffect, useMemo } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Button from "../components/buttons/Button";
+import SearchInput from "../components/inputs/SearchInput";
+import { ChangeEvent } from "react";
 
 const MovementsPageClient: React.FC<any> = ({ movements }) => {
   const [movType, setMovType] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
-  useEffect(() => {}, [movType]);
+  const filterMovementsByName = (movements: any[], searchTerm: string) => {
+    return movements?.filter((mov: any) =>
+      mov.description?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
 
   const filteredMovements = useMemo(() => {
+    let result = [...movements];
+
     if (movType !== "") {
-      return movements.filter((mov: any) => mov.movementType === movType);
-    } else {
-      return [...movements];
+      if (movType === "transfer") {
+        result = result.filter((mov: any) => mov.category === movType);
+      } else {
+        result = result.filter((mov: any) => mov.movementType === movType);
+      }
     }
-  }, [movType, movements]);
+
+    if (searchInput !== "") {
+      result = filterMovementsByName(result, searchInput);
+    }
+
+    return result;
+  }, [movType, searchInput, movements]);
 
   const handleFilter = useCallback(
     (type: string) => {
@@ -32,8 +50,15 @@ const MovementsPageClient: React.FC<any> = ({ movements }) => {
   );
 
   return (
-    <div className="px-6  pt-6">
-      <div className="flex gap-4 mb-6">
+    <div className="px-6  pt-6 flex flex-col gap-6">
+      <SearchInput
+        id="description"
+        bgColor="gray"
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setSearchInput(e.target.value)
+        }
+      />
+      <div className="flex gap-4 ">
         <Button
           label="Expenses"
           rounded
