@@ -55,7 +55,7 @@ const Navbar = () => {
               activeVector="/icons/vectorMovementsActive.png"
               inactiveVector="/icons/vectorMovementsInactive.png"
               onClick={handleClick}
-              selected={pathName === "/movimientos"}
+              selected={pathName === "/movements"}
             />
             <NavButton
               label="Categories"
