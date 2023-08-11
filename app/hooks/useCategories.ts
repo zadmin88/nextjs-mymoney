@@ -1,69 +1,99 @@
 const categories = [
-  { value: "car", icon: "/icons/categories/carVector.png", label: "Automovil" },
+  { value: "car", icon: "/icons/categories/carVector.png", label: "Car" },
   {
     value: "family",
     icon: "/icons/categories/familyVector.png",
-    label: "Familia",
+    label: "Family",
   },
   {
     value: "education",
     icon: "/icons/categories/educationVector.png",
-    label: "Educación",
+    label: "Education",
   },
   {
     value: "gas",
     icon: "/icons/categories/gasVector.png",
-    label: "Gasolina",
-  },
-  {
-    value: "family",
-    icon: "/icons/categories/familyVector.png",
-    label: "Familia",
+    label: "Gas",
   },
   {
     value: "groceries",
     icon: "/icons/categories/groceriesVector.png",
-    label: "Mercado",
+    label: "Groceries",
   },
   {
     value: "health",
     icon: "/icons/categories/healthVector.png",
-    label: "Salud",
+    label: "Health",
   },
   {
     value: "party",
     icon: "/icons/categories/partyVector.png",
-    label: "Fiesta",
+    label: "Party",
   },
   {
     value: "pet",
     icon: "/icons/categories/petVector.png",
-    label: "Mascota",
+    label: "Pet",
   },
   {
-    value: "traveling",
+    value: "travelling",
     icon: "/icons/categories/travellingVector.png",
-    label: "Viajes",
+    label: "Travelling",
   },
   {
     value: "transport",
     icon: "/icons/categories/transportVector.png",
-    label: "Trasporte",
+    label: "Transport",
   },
   {
     value: "shopping",
     icon: "/icons/categories/shoppingVector.png",
-    label: "Compras",
+    label: "Shopping",
   },
   {
     value: "taxes",
     icon: "/icons/categories/taxesVector.png",
-    label: "Impuestos",
+    label: "Taxes",
   },
   {
     value: "restaurant",
     icon: "/icons/categories/restaurantVector.png",
-    label: "Restaurantes",
+    label: "Restaurant",
+  },
+  {
+    value: "supscriptions",
+    icon: "/icons/categories/supscriptionsVector.png",
+    label: "Supscriptions",
+  },
+  {
+    value: "losses",
+    icon: "/icons/categories/lossesVector.png",
+    label: "Losses",
+  },
+  {
+    value: "earnings",
+    icon: "/icons/categories/earningsVector.png",
+    label: "Earnings",
+  },
+  {
+    value: "ensurance",
+    icon: "/icons/categories/ensuranceVector.png",
+    label: "Ensurance",
+  },
+  {
+    value: "salary",
+    icon: "/icons/categories/salaryVector.png",
+    label: "Salary",
+  },
+  {
+    value: "sports",
+    icon: "/icons/categories/sportsVector.png",
+    label: "Sports",
+  },
+  {
+    value: "other",
+    icon: "/icons/categories/otherVector.png",
+    label: "Other",
   },
 ];
 
