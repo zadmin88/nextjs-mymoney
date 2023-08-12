@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import useAccountsList from "@/app/hooks/useAccountsList";
 import useBudgetList from "@/app/hooks/useBudgetList";
+import { Suspense } from "react";
+import Loading from "./loading";
 interface MoneyAccountProps {
   moneyAccount: MoneyAccount;
 }

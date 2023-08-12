@@ -10,6 +10,7 @@ interface IParams {
 export default async function getMoneyAccountById(IParams: IParams) {
   try {
     const { moneyAccountId } = IParams;
+
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {

@@ -3,6 +3,8 @@ import ClientOnly from "@/app/components/ClientOnly";
 import MoneyAccountClient from "./MoneyAccountClient";
 import getMoneyAccount from "@/app/actions/getMoneyAccount";
 import getBudgets from "@/app/actions/getBudgets";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 interface IParams {
   moneyAccountId: string;
