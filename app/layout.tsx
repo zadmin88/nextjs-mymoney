@@ -14,6 +14,7 @@ import Navbar from "./components/navbar/Navbar";
 import AccountModal from "./components/modals/AccountModal";
 import AccountSelectionModal from "./components/modals/AccountSelectionModal";
 import { Suspense } from "react";
+
 import Loading from "./loading";
 // import getMoneyAccount from "./actions/getMoneyAccount";
 
@@ -48,7 +49,7 @@ export default function RootLayout({
         </ClientOnly>
 
         <Suspense fallback={<Loading />}>
-          <div className="pb-20 ">{children}</div>
+          <div>{children}</div>
         </Suspense>
       </body>
     </html>

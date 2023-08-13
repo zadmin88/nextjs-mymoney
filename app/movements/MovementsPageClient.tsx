@@ -3,9 +3,10 @@
 // import qs from 'query-string';
 import React from "react";
 import MovementCard from "../components/movements/MovementCard";
-import { useRouter, useSearchParams } from "next/navigation";
+
 import { useCallback, useState, useEffect, useMemo } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import NoMovements from "../components/movements/NoMovements";
+
 import Button from "../components/buttons/Button";
 import SearchInput from "../components/inputs/SearchInput";
 import { ChangeEvent } from "react";
@@ -49,8 +50,9 @@ const MovementsPageClient: React.FC<any> = ({ movements }) => {
     [setMovType, movType]
   );
 
+  if (movements.length === 0) return <NoMovements />;
   return (
-    <div className="px-6  pt-6 flex flex-col gap-6">
+    <div className="px-6  pt-6 pb-20 flex flex-col gap-6">
       <SearchInput
         id="description"
         bgColor="gray"

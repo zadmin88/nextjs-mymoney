@@ -9,7 +9,7 @@ interface ButtonProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   rounded?: boolean;
-  icon?: IconType;
+  Icon?: IconType;
   iconSrc?: string;
   small?: boolean;
 }
@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   disabled,
   rounded,
-  icon: Icon,
+  Icon,
   iconSrc,
   small,
 }) => {
@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
       className={`   
-          
+          relative
         font-semibold
         flex
         justify-center
@@ -58,16 +58,16 @@ const Button: React.FC<ButtonProps> = ({
         }
         `}
     >
-      {/* {Icon && (
+      {Icon && (
         <Icon
           size={24}
           className="
             absolute
-            left-4
-            top-3
+            left-5
+            top-4
           "
         />
-      )} */}
+      )}
       {iconSrc && (
         <Image
           src={iconSrc}

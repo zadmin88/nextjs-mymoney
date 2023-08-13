@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useState, useEffect, useMemo } from "react";
+import { useCallback, useState, useMemo } from "react";
 import Button from "../components/buttons/Button";
 import DoughnutChart from "../components/DoughnutChart";
 import TotalByCategoryCard from "../components/movements/TotalByCategoryCard";
+import NoMovements from "../components/movements/NoMovements";
 
 const CategoriesPageClient: React.FC<any> = ({ movements }) => {
   const [movType, setMovType] = useState("outcome");
@@ -19,10 +20,6 @@ const CategoriesPageClient: React.FC<any> = ({ movements }) => {
       }
     }
 
-    // if (searchInput !== "") {
-    //   result = filterMovementsByName(result, searchInput);
-    // }
-
     return result;
   }, [movType, movements]);
 
@@ -37,15 +34,9 @@ const CategoriesPageClient: React.FC<any> = ({ movements }) => {
     [setMovType, movType]
   );
 
+  if (movements.length === 0) return <NoMovements />;
   return (
-    <div className="px-6  pt-10 flex flex-col gap-6 pb-6 w-full items-center">
-      {/* <SearchInput
-          id="description"
-          bgColor="gray"
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setSearchInput(e.target.value)
-          }
-        /> */}
+    <div className="px-6  pt-10 pb-24 flex flex-col gap-6  w-full items-center">
       <div className="flex gap-4 w-full">
         <Button
           label="Expenses"

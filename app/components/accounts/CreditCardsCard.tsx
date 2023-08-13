@@ -14,6 +14,9 @@ const CreditCardsCard: React.FC<any> = ({ creditCards }) => {
   if (creditCards.length === 0) {
     return (
       <div className="bg-white rounded-2xl py-4 px-6">
+        <p className="text-center text-sm mb-4 font-extralight">
+          You haven not any credit card registered yet.
+        </p>
         <Button
           rounded
           label="Create credit card"

@@ -22,6 +22,7 @@ const LoginModal = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -43,6 +44,7 @@ const LoginModal = () => {
         toast.success("Logged in");
         router.push("/");
         loginModal.onClose();
+        reset();
       }
 
       if (callback?.error) {
@@ -56,15 +58,17 @@ const LoginModal = () => {
     registerModal.onOpen();
   }, [loginModal, registerModal]);
 
+  const onClose = useCallback(() => {
+    loginModal.onClose();
+    reset();
+  }, [loginModal, reset]);
+
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading
-        title="Bienvenido a MyMoney"
-        subtitle="Inicia sesión para continuar"
-      />
+      <Heading title="Bienvenido a MyMoney" subtitle="Login to continue" />
       <Input
         id="email"
-        label="Correo Electronico"
+        label="Email"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -72,7 +76,7 @@ const LoginModal = () => {
       />
       <Input
         id="password"
-        label="Constraseña"
+        label="Password"
         type="password"
         disabled={isLoading}
         register={register}
@@ -85,20 +89,13 @@ const LoginModal = () => {
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
-      {/* <Button
-        
-        label='Continue with Google'
-        icon={FcGoogle}
-        // onClick={() => signIn('google')}
-        onClick={() => {}}
-        /> */}
 
       <div
         className="
       text-neutral-500 text-center mt-4 font-light"
       >
         <p>
-          Primera vez en MyMoney?
+          First time in MyMoney?
           <span
             onClick={onToggle}
             className="
@@ -108,7 +105,7 @@ const LoginModal = () => {
             "
           >
             {" "}
-            Crea una cuenta
+            Signup
           </span>
         </p>
       </div>
@@ -121,7 +118,7 @@ const LoginModal = () => {
       disabled={isLoading}
       isOpen={loginModal.isOpen}
       actionLabel="Iniciar sesión"
-      onClose={loginModal.onClose}
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}

@@ -14,6 +14,9 @@ const BudgetCard: React.FC<any> = ({ budgets }) => {
   if (budgets.length === 0) {
     return (
       <div className="bg-white rounded-2xl py-4 px-6">
+        <p className="text-center text-sm mb-4 font-extralight">
+          You haven not any budget registered yet.
+        </p>
         <Button rounded label="Create budget" onClick={budgetModal.onOpen} />
       </div>
     );

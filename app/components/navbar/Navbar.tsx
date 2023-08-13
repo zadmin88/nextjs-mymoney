@@ -21,8 +21,14 @@ const Navbar = () => {
     [router]
   );
 
+  // if (pathName === "/login") return <div className="bg-brand-lime"></div>;
+
   return (
-    <div className="fixed w-full bottom-0 bg-white z-10 shadow-sm ">
+    <div
+      className={`fixed w-full bottom-0 bg-white z-10 shadow-sm ${
+        pathName === "/login" ? "hidden" : ""
+      }`}
+    >
       <div className="py-5 border-t">
         <Container>
           <div

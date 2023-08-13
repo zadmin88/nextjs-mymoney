@@ -14,6 +14,9 @@ const AccountsCard: React.FC<any> = ({ regularAccounts }) => {
   if (regularAccounts.length === 0) {
     return (
       <div className="bg-white rounded-2xl py-4 px-6">
+        <p className="text-center text-sm mb-4 font-extralight">
+          You haven not any account registered yet.
+        </p>
         <Button rounded label="Create account" onClick={accountModal.onOpen} />
       </div>
     );

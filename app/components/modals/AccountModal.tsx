@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -10,7 +10,6 @@ import Heading from "../Heading";
 import Input from "../inputs/Input";
 import useAccountModal from "../../hooks/useAccountModal";
 import AccountTypeSelect from "../inputs/AccountTypeSelect";
-import CurrencySelect from "../inputs/CurrencySelect";
 
 const AccountModal = () => {
   const router = useRouter();

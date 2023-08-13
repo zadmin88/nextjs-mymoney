@@ -15,6 +15,7 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import Button from "../buttons/Button";
+import { signIn } from "next-auth/react";
 
 const RegisterModal = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const RegisterModal = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -34,18 +36,38 @@ const RegisterModal = () => {
     },
   });
 
+  const onClose = useCallback(() => {
+    registerModal.onClose();
+    reset();
+  }, [registerModal, reset]);
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
     axios
       .post("/api/register", data)
       .then(() => {
-        toast.success("Registrado!");
-        registerModal.onClose();
-        loginModal.onOpen();
+        toast.success("Account created!");
+        signIn("credentials", {
+          ...data,
+          redirect: false,
+        }).then((callback) => {
+          setIsLoading(false);
+
+          if (callback?.ok) {
+            toast.success("Logged in");
+            router.push("/");
+            registerModal.onClose();
+            reset();
+          }
+
+          if (callback?.error) {
+            toast.error(callback.error);
+          }
+        });
       })
       .catch((error) => {
-        toast.error("Algo salío mal");
+        toast.error("Account already exist");
       })
       .finally(() => {
         setIsLoading(false);
@@ -58,10 +80,10 @@ const RegisterModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Registrate" subtitle="Registrate para continuar" />
+      <Heading title="Registrate" subtitle="Signup to continue" />
       <Input
         id="name"
-        label="Nombre"
+        label="Name"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -69,7 +91,7 @@ const RegisterModal = () => {
       />
       <Input
         id="email"
-        label="Correo Electronico"
+        label="Email"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -77,7 +99,7 @@ const RegisterModal = () => {
       />
       <Input
         id="password"
-        label="Constraseña"
+        label="Password"
         type="password"
         disabled={isLoading}
         register={register}
@@ -103,7 +125,7 @@ const RegisterModal = () => {
       text-neutral-500 text-center mt-4 font-light"
       >
         <p>
-          Ya tienes cuenta?
+          Do you have an account?
           <span
             onClick={onToggle}
             className="
@@ -113,7 +135,7 @@ const RegisterModal = () => {
             "
           >
             {" "}
-            Inicia sesión
+            Log in
           </span>
         </p>
       </div>
@@ -126,7 +148,7 @@ const RegisterModal = () => {
       disabled={isLoading}
       isOpen={registerModal.isOpen}
       actionLabel="Crear cuenta"
-      onClose={registerModal.onClose}
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}

@@ -51,15 +51,19 @@ const Input: React.FC<InputProps> = ({
         className={`
           peer 
           w-full
-          p-2
-          pt-11 
+          
+           
           font-light          
           outline-none
           transition
           disabled:opacity-70
           disabled:cursor-not-allowed
           ${bgColor === "white" ? "bg-white" : "bg-gray-100 text-gray-900 "}
-          ${pathName === "/login" ? "border-2 rounded-xl" : "border-b-2"}
+          ${
+            pathName === "/login"
+              ? "border-2 rounded-xl pt-6 pb-2"
+              : "border-b-2 pt-11 p-2"
+          }
           ${formatPrice ? "pl-9" : "pl-4"}
           ${errors[id] ? "border-rose-500" : "border-neutral-300"}
           ${errors[id] ? "focus:border-rose-500" : "focus:border-black"}
@@ -70,16 +74,18 @@ const Input: React.FC<InputProps> = ({
           absolute 
           text-base
           duration-150 
-          transform 
-          -translate-y-3 
-          top-8
+          transform     
           z-10 
           origin-[0] 
+          ${
+            pathName === "/login"
+              ? "top-2 -translate-y-1 peer-focus:-translate-y-2"
+              : "top-8 -translate-y-3 peer-focus:-translate-y-5"
+          }
           ${formatPrice ? "left-9" : "left-4"}
           peer-placeholder-shown:scale-100 
           peer-placeholder-shown:translate-y-2 
           peer-focus:scale-75
-          peer-focus:-translate-y-5
           ${errors[id] ? "text-rose-500" : "text-zinc-400"}
         `}
       >
