@@ -94,7 +94,7 @@ const MovementCard: React.FC<MovementProps> = ({ movement }) => {
               {movement.description}
             </span>
             <span className="text-base font-light">{movement.category}</span>
-            <span className="text-base font-light">
+            <span className="text-sm font-light text-gray-500">
               {moment(movement.createdAt).format("MMM Do")}
             </span>
           </div>
