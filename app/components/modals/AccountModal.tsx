@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ const AccountModal = () => {
   const accountModal = useAccountModal();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [buttonDisable, setButtonDisable] = useState(false);
 
   const {
     register,
@@ -30,12 +31,18 @@ const AccountModal = () => {
       name: "",
       accountType: null,
       balance: "",
-      currency: null,
     },
   });
 
   const accountType = watch("accountType");
-  const currency = watch("currency");
+
+  useEffect(() => {
+    if (accountType === null) {
+      setButtonDisable(true);
+    } else {
+      setButtonDisable(false);
+    }
+  }, [accountType]);
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -54,6 +61,7 @@ const AccountModal = () => {
         toast.success("Cuenta Creada!");
         router.refresh();
         accountModal.onClose();
+        reset();
       })
       .catch((error) => {
         toast.error("Algo salío mal");
@@ -87,13 +95,13 @@ const AccountModal = () => {
           bgColor="gray"
           required
         />
-        {/* <CurrencySelect
-          value={currency}
-          onChange={(value) => setCustomValue("currency", value)}
-        /> */}
+
         <AccountTypeSelect
+          id="accountType"
           value={accountType}
+          errors={errors}
           onChange={(value) => setCustomValue("accountType", value)}
+          required
         />
       </div>
     </div>
@@ -108,6 +116,7 @@ const AccountModal = () => {
       onClose={accountModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
+      buttonDisable={buttonDisable}
       // footer={footerContent}
     />
   );

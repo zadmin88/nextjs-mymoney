@@ -2,6 +2,7 @@
 
 import Select from "react-select";
 import Image from "next/image";
+import { FieldErrors } from "react-hook-form";
 
 import useAccountType from "@/app/hooks/useAccountType";
 
@@ -14,11 +15,17 @@ export type AccountTypeSelectValue = {
 interface AccountTypeSelectProps {
   value?: AccountTypeSelectValue;
   onChange: (value: AccountTypeSelectValue) => void;
+  required: boolean;
+  errors: FieldErrors;
+  id: string;
 }
 
 const AccountTypeSelect: React.FC<AccountTypeSelectProps> = ({
   value,
   onChange,
+  required,
+  errors,
+  id,
 }) => {
   const { getAll } = useAccountType();
 
@@ -26,6 +33,7 @@ const AccountTypeSelect: React.FC<AccountTypeSelectProps> = ({
     <div>
       <Select
         placeholder="Account type"
+        required={required}
         isClearable
         unstyled
         options={getAll()}
@@ -47,7 +55,10 @@ const AccountTypeSelect: React.FC<AccountTypeSelectProps> = ({
           </div>
         )}
         classNames={{
-          control: () => "p-3 border-b-2",
+          control: () => `p-3 border-b-2           ${
+            errors[id] ? "border-rose-500" : "border-neutral-300"
+          }
+          ${errors[id] ? "focus:border-rose-500" : "focus:border-black"}`,
           input: () => "text-lg",
           option: () => "text-lg bg-white py-2",
         }}

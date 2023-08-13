@@ -21,16 +21,14 @@ const CreditCardModal = () => {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors },
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
       accountType: "creditCard",
-      balance: 0,
-      creditLimit: 0,
+      balance: "",
+      creditLimit: "",
     },
   });
 
@@ -40,12 +38,13 @@ const CreditCardModal = () => {
     axios
       .post("/api/accounts", data)
       .then(() => {
-        toast.success("Cuenta Creada!");
+        toast.success("Credit card added!");
         router.refresh();
         accountModal.onClose();
+        reset();
       })
       .catch((error) => {
-        toast.error("Algo salío mal");
+        toast.error("Something went wrong!");
       })
       .finally(() => {
         setIsLoading(false);
@@ -74,7 +73,6 @@ const CreditCardModal = () => {
           register={register}
           errors={errors}
           bgColor="gray"
-          required
         />
 
         <Input
@@ -87,10 +85,6 @@ const CreditCardModal = () => {
           bgColor="gray"
           required
         />
-        {/* <CurrencySelect
-          value={currency}
-          onChange={(value) => setCustomValue("currency", value)}
-        /> */}
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ interface ModalProps {
   secondaryActionLabel?: string;
   color?: string;
   rounded?: boolean;
+  buttonDisable?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -32,6 +33,7 @@ const Modal: React.FC<ModalProps> = ({
   secondaryActionLabel,
   color,
   rounded,
+  buttonDisable,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -181,7 +183,7 @@ const Modal: React.FC<ModalProps> = ({
                   {onSubmit && (
                     <Button
                       color={color}
-                      disabled={disabled}
+                      disabled={buttonDisable || disabled}
                       label={actionLabel}
                       onClick={handleSubmit}
                       rounded={rounded}

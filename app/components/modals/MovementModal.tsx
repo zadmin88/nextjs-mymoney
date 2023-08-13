@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, set, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Modal from "./Modal";
 import Heading from "../Heading";
@@ -24,6 +24,7 @@ const MovementModal = () => {
   const budgetId = params?.budgetId;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [buttonDisable, setButtonDisable] = useState(false);
   const [movType, setMovType] = useState("outcome");
 
   const {
@@ -48,6 +49,20 @@ const MovementModal = () => {
   const account = watch("account");
   const budget = watch("budget");
   const accountFrom = watch("accountFrom");
+
+  useEffect(() => {
+    if ((movType === "outcome" || movType === "income") && category === null) {
+      setButtonDisable(true);
+
+      if (!moneyAccountId && account === null) {
+        setButtonDisable(true);
+      }
+    } else if (movType === "transfer" && account === null) {
+      setButtonDisable(true);
+    } else {
+      setButtonDisable(false);
+    }
+  }, [category, movType, account, moneyAccountId]);
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -268,7 +283,7 @@ const MovementModal = () => {
       onClose={movementModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
-      // footer={footerContent}
+      buttonDisable={buttonDisable}
     />
   );
 };

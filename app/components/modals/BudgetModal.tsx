@@ -19,8 +19,6 @@ const BudgetModal = () => {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors },
     reset,
   } = useForm<FieldValues>({
@@ -42,6 +40,7 @@ const BudgetModal = () => {
         toast.success("Budget created!");
         router.refresh();
         budgetModal.onClose();
+        reset();
       })
       .catch((error) => {
         toast.error("Somthing went wrong");
