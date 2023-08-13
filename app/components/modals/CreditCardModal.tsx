@@ -51,6 +51,10 @@ const CreditCardModal = () => {
       });
   };
 
+  const onClose = useCallback(() => {
+    accountModal.onClose();
+    reset();
+  }, [accountModal, reset]);
   const bodyContent = (
     <div className="flex flex-col gap-4 ">
       <Heading title="Add credit card" />
@@ -95,7 +99,7 @@ const CreditCardModal = () => {
       disabled={isLoading}
       isOpen={accountModal.isOpen}
       actionLabel="+ Add"
-      onClose={accountModal.onClose}
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       // footer={footerContent}

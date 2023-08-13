@@ -41,7 +41,7 @@ const AccountsContainer: React.FC<any> = ({ moneyAccounts, userBudgets }) => {
   }, [accounts, setAccountList, setBudgetList, budgetList]);
 
   return (
-    <div className="bg-neutral-100  px-6 pb-6  rounded-3xl ">
+    <div className="bg-neutral-100  px-6 pb-6 rounded-t-3xl md:rounded-3xl ">
       <h1 className="text-lg text-gray-900 font-bold pt-6 mb-4  ">
         My accounts
       </h1>

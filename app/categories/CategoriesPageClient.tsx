@@ -34,7 +34,12 @@ const CategoriesPageClient: React.FC<any> = ({ movements }) => {
     [setMovType, movType]
   );
 
-  if (movements.length === 0) return <NoMovements />;
+  if (movements.length === 0)
+    return (
+      <div className="pt-10 pb-24 flex flex-col gap-6 h-screen  w-full items-center justify-center">
+        <NoMovements />
+      </div>
+    );
   return (
     <div className="px-6  pt-10 pb-24 flex flex-col gap-6  w-full items-center">
       <div className="flex gap-4 w-full">
@@ -66,10 +71,16 @@ const CategoriesPageClient: React.FC<any> = ({ movements }) => {
         <DoughnutChart data={filteredMovements} />
       </div>
       <div className="flex flex-col gap-6 w-full">
-        <h1 className="text-xl font-semibold">Totals by category</h1>
-        {filteredMovements.map((mov: any, i) => (
-          <TotalByCategoryCard key={mov.category + i} movement={mov} />
-        ))}
+        {filteredMovements.length === 0 ? (
+          <NoMovements />
+        ) : (
+          <div>
+            <h1 className="text-xl font-semibold">Totals by category</h1>
+            {filteredMovements.map((mov: any, i) => (
+              <TotalByCategoryCard key={mov.category + i} movement={mov} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

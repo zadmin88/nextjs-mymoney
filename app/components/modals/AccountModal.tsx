@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -70,6 +70,11 @@ const AccountModal = () => {
       });
   };
 
+  const onClose = useCallback(() => {
+    accountModal.onClose();
+    reset();
+  }, [accountModal, reset]);
+
   const bodyContent = (
     <div className="flex flex-col gap-4 ">
       <Heading title="Add new account" />
@@ -109,7 +114,7 @@ const AccountModal = () => {
       disabled={isLoading}
       isOpen={accountModal.isOpen}
       actionLabel="+ Add"
-      onClose={accountModal.onClose}
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       buttonDisable={buttonDisable}

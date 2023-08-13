@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, set, useForm } from "react-hook-form";
@@ -26,6 +26,8 @@ const MovementModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(false);
   const [movType, setMovType] = useState("outcome");
+
+  let bodyContent;
 
   const {
     register,
@@ -127,7 +129,10 @@ const MovementModal = () => {
     }
   };
 
-  let bodyContent;
+  const onClose = useCallback(() => {
+    movementModal.onClose();
+    reset();
+  }, [movementModal, reset]);
 
   if (movType !== "transfer") {
     bodyContent = (
@@ -280,7 +285,7 @@ const MovementModal = () => {
       disabled={isLoading}
       isOpen={movementModal.isOpen}
       actionLabel="+ Add"
-      onClose={movementModal.onClose}
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       buttonDisable={buttonDisable}

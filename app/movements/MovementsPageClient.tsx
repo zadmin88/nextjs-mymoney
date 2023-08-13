@@ -50,7 +50,12 @@ const MovementsPageClient: React.FC<any> = ({ movements }) => {
     [setMovType, movType]
   );
 
-  if (movements.length === 0) return <NoMovements />;
+  if (movements.length === 0)
+    return (
+      <div className="pt-10 pb-24 flex flex-col gap-6 h-screen  w-full items-center justify-center">
+        <NoMovements />
+      </div>
+    );
   return (
     <div className="px-6  pt-6 pb-20 flex flex-col gap-6">
       <SearchInput
@@ -85,11 +90,17 @@ const MovementsPageClient: React.FC<any> = ({ movements }) => {
           small
         />
       </div>
-      <div className="flex flex-col gap-4 pb-6">
-        {filteredMovements.map((mov: any) => (
-          <MovementCard movement={mov} key={mov.id} />
-        ))}
-      </div>
+      {filteredMovements.length === 0 ? (
+        <div className="pt-10 pb-24 flex flex-col gap-6 h-screen  w-full items-center justify-center">
+          <NoMovements />
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4 pb-6">
+          {filteredMovements.map((mov: any) => (
+            <MovementCard movement={mov} key={mov.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

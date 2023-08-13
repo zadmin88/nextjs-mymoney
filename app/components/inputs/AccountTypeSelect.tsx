@@ -40,8 +40,8 @@ const AccountTypeSelect: React.FC<AccountTypeSelectProps> = ({
             <Image
               src={option?.icon}
               alt={option.label}
-              height={24}
-              width={24}
+              height={100}
+              width={100}
               className="w-6 h-6"
             />
             <div>{option.label}</div>

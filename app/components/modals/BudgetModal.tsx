@@ -26,7 +26,7 @@ const BudgetModal = () => {
       name: "",
       fromDate: "",
       toDate: "",
-      balance: "",
+      balance: 0,
       totalBudget: "",
     },
   });
@@ -49,6 +49,11 @@ const BudgetModal = () => {
         setIsLoading(false);
       });
   };
+
+  const onClose = useCallback(() => {
+    budgetModal.onClose();
+    reset();
+  }, [budgetModal, reset]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4 ">
@@ -116,7 +121,7 @@ const BudgetModal = () => {
       disabled={isLoading}
       isOpen={budgetModal.isOpen}
       actionLabel="+ Add"
-      onClose={budgetModal.onClose}
+      onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       // footer={footerContent}
