@@ -96,11 +96,8 @@ const AccountModal = () => {
         />
 
         <AccountTypeSelect
-          id="accountType"
           value={accountType}
-          errors={errors}
           onChange={(value) => setCustomValue("accountType", value)}
-          required
         />
       </div>
     </div>
