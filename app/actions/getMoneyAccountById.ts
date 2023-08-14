@@ -19,6 +19,10 @@ export default async function getMoneyAccountById(IParams: IParams) {
 
     let query: any = {};
 
+    if (currentUser) {
+      query.userId = currentUser.id;
+    }
+
     query.id = moneyAccountId;
 
     //   if (startDate && endDate) {
@@ -71,7 +75,7 @@ export default async function getMoneyAccountById(IParams: IParams) {
     //   },
     // });
 
-    const moneyAccount = await prisma.moneyAccount.findUnique({
+    const moneyAccount = await prisma.moneyAccount.findFirst({
       where: query,
       include: {
         movements: {
@@ -81,6 +85,10 @@ export default async function getMoneyAccountById(IParams: IParams) {
         },
       },
     });
+
+    if (!moneyAccount) {
+      return null;
+    }
 
     const sumBymovementType = await prisma.movement.groupBy({
       where: {

@@ -18,6 +18,9 @@ export default async function getBudgetById(IParams: IParams) {
 
     let query: any = {};
 
+    if (currentUser) {
+      query.userId = currentUser.id;
+    }
     query.id = budgetId;
 
     //   if (startDate && endDate) {
@@ -39,12 +42,14 @@ export default async function getBudgetById(IParams: IParams) {
     //     };
     //   }
 
-    const budget = await prisma.budget.findUnique({
+    const budget = await prisma.budget.findFirst({
       where: query,
       include: {
         movements: true,
       },
     });
+
+    if (!budget) return null;
 
     const safeBudget = {
       ...budget,
